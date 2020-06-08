@@ -11,16 +11,21 @@ const store = new Vuex.Store({
 		forcedLogin: false,
 		hasLogin: false,
 		userName: "",
-		studentId:"",
+		teacherId: ""
 	},
 	mutations: {
-		login(state, userName) {
-			state.userName = userName || '新用户';
+		login(state, data) {
+			state.userName = data.userName || '新用户';
 			state.hasLogin = true;
+			
+			state.teacherId = data.teacherId;
+			
 		},
 		logout(state) {
 			state.userName = "";
 			state.hasLogin = false;
+			state.teacherId = "";
+			
 		}
 	}
 })

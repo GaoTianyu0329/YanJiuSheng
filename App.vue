@@ -132,9 +132,9 @@
 	button.primary {
 		background-color: #FFFFFF;
 		outline-style: none ;
-		border: 1px solid #0faeff; 
+		border: 1px solid #d60016; 
 		border-radius: 8px;
 		text-decoration-color: #000;
-		color: #0faeff;
+		color: #d60016;
 	}
 </style>

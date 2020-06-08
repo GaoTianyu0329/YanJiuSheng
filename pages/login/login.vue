@@ -13,7 +13,7 @@
 			
 		
 		<view class="btn-row">
-			<button type="primary" class="primary" @tap="bindLogin">登录</button>
+			<button type="default" class="primary" @tap="bindLogin">登录</button>
 		</view>
 		
 		<view class="oauth-row" v-if="hasProvider" v-bind:style="{top: positionTop + 'px'}">
@@ -132,7 +132,9 @@
 								 * 实际开发中，获取用户信息后，需要将信息上报至服务端。
 								 * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
 								 */
-								this.toMain(infoRes.userInfo.nickName);
+								console.log(infoRes.userInfo.nickName)
+								this.toMain(infoRes.userInfo.nickName,'2017xxxxxxxx');//后端登录完成后改为教师号
+								
 							},
 							fail() {
 								uni.showToast({
@@ -151,7 +153,7 @@
 				detail
 			}) {
 				if (detail.userInfo) {
-					this.toMain(detail.userInfo.nickName);
+					this.toMain(detail.userInfo.nickName,'2017xxxx');//后端登录完成后改为教师号
 				} else {
 					uni.showToast({
 						icon: 'none',
@@ -159,8 +161,16 @@
 					});
 				}
 			},
-			toMain(userName) {
-				this.login(userName);
+			toMain(userName,teacherId) {
+				
+				const data = {
+					userName: userName,
+					teacherId: teacherId
+					
+				}
+				this.login(data);
+				// this.login(userName,teacherId);
+				
 				/**
 				 * 强制登录时使用reLaunch方式跳转过来
 				 * 返回首页也使用reLaunch方式

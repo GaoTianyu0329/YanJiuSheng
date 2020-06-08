@@ -35,7 +35,7 @@
     ],
 	"tabBar": {
 			"color":"#8a8a8a",
-			"selectedColor":"#d4237a",
+			"selectedColor":"#d60016",
 			"borderStyle":"black",
 			"backgroundColor":"#ffffff",
 			"list": [
@@ -64,8 +64,9 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "研究生管理系统",
-		"navigationBarBackgroundColor": "#d4237a",
+		"navigationBarBackgroundColor": "#d60016",
 		"backgroundColor": "#FFFFFF"
-	}
+	},
+	"sitemapLocation":"sitemap.json"
 	
 }
