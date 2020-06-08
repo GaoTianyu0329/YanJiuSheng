@@ -1,0 +1,71 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页,
+		{
+			"path": "pages/main/main",
+			"style": {
+				
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}, {
+			"path": "pages/reg/reg",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/pwd/pwd",
+			"style": {
+				"navigationBarTitleText": "找回密码"
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},{
+			"path":"pages/me/me"
+		}
+	    ,{
+            "path" : "pages/notice/notice",
+            "style" : {}
+        }
+    ],
+	"tabBar": {
+			"color":"#8a8a8a",
+			"selectedColor":"#d4237a",
+			"borderStyle":"black",
+			"backgroundColor":"#ffffff",
+			"list": [
+				{
+					"pagePath":"pages/main/main",
+					"text":"菜单",
+					"iconPath":"",
+					"selectedIconPath":""
+				},
+				{
+					"pagePath":"pages/notice/notice",
+					"text":"通知",
+					"iconPath":"",
+					"selectedIconPath":""
+				},
+				{
+					"pagePath":"pages/me/me",
+					"text":"我的",
+					"iconPath":"",
+					"selectedIconPath":""
+				}
+				
+			]	
+		 },
+	
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "研究生管理系统",
+		"navigationBarBackgroundColor": "#d4237a",
+		"backgroundColor": "#FFFFFF"
+	}
+	
+}
