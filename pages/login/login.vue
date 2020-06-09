@@ -1,13 +1,16 @@
 <template>
 	<view class="content">
+		<view class="logo-row">
+			<image class="logo-img" src="../../static/img/sdulogo.jpg"></image>
+		</view>
 		
 			<view class="m-input-row">
 				
-				<m-input class="m-input" type="text" clearable focus v-model="account" placeholder="请输入账号"></m-input>
+				<m-input class="m-input" type="text" clearable focus v-model="account" placeholder="教师号"></m-input>
 			</view>
 			<view class="m-input-row">
 				
-				<m-input class="m-input" color="#000000" type="password" displayable v-model="password" placeholder="请输入密码"></m-input>
+				<m-input class="m-input" color="#000000" type="password" displayable v-model="password" placeholder="密码"></m-input>
 			</view>
 		
 			
@@ -16,14 +19,14 @@
 			<button type="default" class="primary" @tap="bindLogin">登录</button>
 		</view>
 		
-		<view class="oauth-row" v-if="hasProvider" v-bind:style="{top: positionTop + 'px'}">
+		<!-- <view class="oauth-row" v-if="hasProvider" v-bind:style="{top: positionTop + 'px'}">
 			<view class="oauth-image" v-for="provider in providerList" :key="provider.value">
 				<image :src="provider.image" @tap="oauth(provider.value)"></image>
 				<!-- #ifdef MP-WEIXIN -->
-				<button v-if="!isDevtools" open-type="getUserInfo" @getuserinfo="getUserInfo"></button>
+				<!-- <button v-if="!isDevtools" open-type="getUserInfo" @getuserinfo="getUserInfo"></button> -->
 				<!-- #endif -->
-			</view>
-		</view>
+			 <!-- </view> -->
+		 <!-- </view> -->
 	</view>
 </template>
 
@@ -86,17 +89,17 @@
 				 * 客户端对账号信息进行一些必要的校验。
 				 * 实际开发中，根据业务需要进行处理，这里仅做示例。
 				 */
-				if (this.account.length < 5) {
+				if (this.account.length < 1) {
 					uni.showToast({
 						icon: 'none',
-						title: '账号最短为 5 个字符'
+						title: '教师号不能为空'
 					});
 					return;
 				}
-				if (this.password.length < 6) {
+				if (this.password.length < 1) {
 					uni.showToast({
 						icon: 'none',
-						title: '密码最短为 6 个字符'
+						title: '密码不能为空'
 					});
 					return;
 				}
@@ -110,10 +113,22 @@
 					password: this.password
 				};
 				const validUser = service.getUsers().some(function(user) {
-					return data.account === user.account && data.password === user.password;
+					return data.account === "123456" && data.password === "123456";
 				});
 				if (validUser) {
-					this.toMain(this.account);
+					uni.showModal({
+						title: '登录成功',
+						content: '是否与微信账号关联',
+						
+						showCancel: true,
+						success: (res) => {
+							if (res.confirm) {
+								this.oauth(this.providerList[0].value);
+								
+							}
+						}
+					});
+					// this.toMain(this.account);
 				} else {
 					uni.showToast({
 						icon: 'none',
@@ -122,6 +137,7 @@
 				}
 			},
 			oauth(value) {
+				console.log(value)
 				uni.login({
 					provider: value,
 					success: (res) => {
@@ -250,6 +266,18 @@
 		margin-left: 50rpx;
 		
 	}
+	.logo-row{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+	}
+	.logo-img{
+		width: 100%;
+		height: 400rpx;
+		
+	}
+	
 	.m-input {
 		padding-top: 12rpx;
 		padding-bottom: 12rpx;
