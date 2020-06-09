@@ -109,13 +109,16 @@
 				 * 实际开发中，使用 uni.request 将账号信息发送至服务端，客户端在回调函数中获取结果信息。
 				 */
 				const data = {
-					account: this.account,
+					teacherId: this.account,
 					password: this.password
 				};
 				const validUser = service.getUsers().some(function(user) {
-					return data.account === "123456" && data.password === "123456";
+					return data.teacherId === "123456" && data.password === "123456";
 				});
 				if (validUser) {
+					this.storageData("teacherId",data.teacherId);
+					this.storageData("pwd",data.password);
+					this.storageData("hasLogin",true);
 					uni.showModal({
 						title: '登录成功',
 						content: '是否与微信账号关联',
@@ -123,7 +126,10 @@
 						showCancel: true,
 						success: (res) => {
 							if (res.confirm) {
-								this.oauth(this.providerList[0].value);
+								this.oauth(this.providerList[0].value,data);
+								
+							}else if(res.cancel){
+								this.toMain(data);
 								
 							}
 						}
@@ -136,8 +142,8 @@
 					});
 				}
 			},
-			oauth(value) {
-				console.log(value)
+			oauth(value,userData) {
+				
 				uni.login({
 					provider: value,
 					success: (res) => {
@@ -148,8 +154,18 @@
 								 * 实际开发中，获取用户信息后，需要将信息上报至服务端。
 								 * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
 								 */
-								console.log(infoRes.userInfo.nickName)
-								this.toMain(infoRes.userInfo.nickName,'2017xxxxxxxx');//后端登录完成后改为教师号
+								// console.log(infoRes.userInfo.nickName)
+								this.storageData('userName',infoRes.userInfo.nickName)
+								this.storageData('openId',infoRes.userInfo.nickName)
+								const data = {
+									userName: infoRes.userInfo.nickName,
+									
+									teacherId: userData.teacherId,
+									pwd:userData.password
+									
+									
+								}
+								this.toMain(data);//后端登录完成后改为教师号
 								
 							},
 							fail() {
@@ -177,13 +193,9 @@
 					});
 				}
 			},
-			toMain(userName,teacherId) {
+			toMain(data) {
+				// this.initState();
 				
-				const data = {
-					userName: userName,
-					teacherId: teacherId
-					
-				}
 				this.login(data);
 				// this.login(userName,teacherId);
 				
@@ -199,6 +211,20 @@
 					uni.navigateBack();
 				}
 
+			},
+			
+			
+			storageData(key,data){
+				uni.setStorage({
+					key:key,
+					data:data,
+					success() {
+					// console.log('成功了key:'+key+'data:'+data)
+					},
+					fail() {
+					// console.log('缓存失败了key:'+key+'data:'+data)
+					}
+				});
 			}
 		},
 		onReady() {

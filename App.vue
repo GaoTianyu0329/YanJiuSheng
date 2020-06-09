@@ -1,10 +1,44 @@
 <script>
+	import {
+		mapMutations
+	} from 'vuex'
 	export default {
+		methods:{
+			...mapMutations(['init']),
+			getStorageData(key){
+				var result = "";
+				try{
+					result = uni.getStorageSync(key);
+				}catch(e){
+					
+				};
+				
+				console.log("result"+result);
+				return result;
+				
+			},
+			initState(){
+				const teacherId = this.getStorageData("teacherId") || "";
+				const openId = this.getStorageData("openId") || "";
+				const userName = this.getStorageData("userName") || "";
+				const hasLogin = this.getStorageData("hasLogin") || false;
+				const data = {
+					teacherId:teacherId,
+					openId:openId,
+					userName:userName,
+					hasLogin:hasLogin
+				}
+				this.init(data)
+				console.log("init"+data.hasLogin);
+			},
+		},
 		onLaunch: function() {
 			console.log('App Launch');
+			this.initState()
 		},
 		onShow: function() {
 			console.log('App Show');
+			
 		},
 		onHide: function() {
 			console.log('App Hide');
