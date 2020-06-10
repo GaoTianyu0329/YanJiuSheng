@@ -100,7 +100,7 @@
 		display: flex;
 		flex: 1;
 		flex-direction: column;
-		background-color: #ffffff;
+		background-color: #F8F8F8;
 		padding: 10px;
 	}
 
@@ -160,7 +160,7 @@
 	}
 
 	.btn-row {
-		margin-top: 25px;
+		margin-top: 16rpx;
 		margin-left: 50rpx;
 		margin-right: 50rpx;
 	}
