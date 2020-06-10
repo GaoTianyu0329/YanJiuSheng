@@ -42,20 +42,20 @@
 				{
 					"pagePath":"pages/main/main",
 					"text":"菜单",
-					"iconPath":"",
-					"selectedIconPath":""
+					"iconPath":"static/img/main.png",
+					"selectedIconPath":"static/img/selectedMain.png"
 				},
 				{
 					"pagePath":"pages/notice/notice",
 					"text":"通知",
-					"iconPath":"",
-					"selectedIconPath":""
+					"iconPath":"static/img/notice.png",
+					"selectedIconPath":"static/img/selectedNotice.png"
 				},
 				{
 					"pagePath":"pages/me/me",
 					"text":"我的",
-					"iconPath":"",
-					"selectedIconPath":""
+					"iconPath":"static/img/me.png",
+					"selectedIconPath":"static/img/selectedMe.png"
 				}
 				
 			]	
