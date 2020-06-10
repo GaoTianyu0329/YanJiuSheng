@@ -13,7 +13,7 @@
 					
 				};
 				
-				console.log("result"+result);
+				
 				return result;
 				
 			},
@@ -22,11 +22,13 @@
 				const openId = this.getStorageData("openId") || "";
 				const userName = this.getStorageData("userName") || "";
 				const hasLogin = this.getStorageData("hasLogin") || false;
+				const pwd = this.getStorageData("pwd");
 				const data = {
 					teacherId:teacherId,
 					openId:openId,
 					userName:userName,
-					hasLogin:hasLogin
+					hasLogin:hasLogin,
+					pwd:pwd
 				}
 				this.init(data)
 				console.log("init"+data.hasLogin);

@@ -22,6 +22,7 @@ const store = new Vuex.Store({
 			state.userName = data.userName;
 			state.hasLogin = data.hasLogin;
 			state.teacherId = data.teacherId;
+			state.pwd = data.pwd;
 		},
 		login(state, data) {
 			// console.log(data)
@@ -36,6 +37,7 @@ const store = new Vuex.Store({
 			state.userName = "";
 			state.hasLogin = false;
 			state.teacherId = "";
+			state.pwd = '';
 			
 		}
 	}

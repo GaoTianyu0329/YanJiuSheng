@@ -26,7 +26,7 @@
 		mapMutations
 	} from 'vuex'
 	export default {
-		computed:mapState(['forcedLogin', 'hasLogin', 'userName','teacherId']),
+		computed:mapState(['forcedLogin', 'hasLogin', 'userName','teacherId','openId']),
 		
 		data() {
 			return {
@@ -46,7 +46,17 @@
 				});
 			},
 			bindLogout(){
-				this.logout();
+				try {
+				    uni.clearStorageSync();
+					this.logout();
+				} catch (e) {
+				    // error
+					uni.showToast({
+						icon: 'none',
+						title: '注销失败'
+					});
+				}
+				
 				
 			}
 		}

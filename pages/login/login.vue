@@ -112,9 +112,7 @@
 					teacherId: this.account,
 					password: this.password
 				};
-				const validUser = service.getUsers().some(function(user) {
-					return data.teacherId === "123456" && data.password === "123456";
-				});
+				const validUser = data.teacherId === "123456" && data.password === "123456";;
 				if (validUser) {
 					this.storageData("teacherId",data.teacherId);
 					this.storageData("pwd",data.password);
