@@ -23,29 +23,58 @@
 			</view>
 			<view class="col">
 				<view class="scell">
-					<view class="text-row">
-						个人信息
+					<view class="text-row" @tap='navigateTo("dissertation")'>
+						密码修改
 					</view>
 					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
 				</view>
 				<view class="view-line"></view>
-				<view class="scell">
-					<view class="text-row">
-						个人信息
-					</view>
-					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
-				</view>
-				<view class="view-line"></view>
-				<view class="scell">
+				<view class="scell" @tap="navigateTo('userInfo')">
 					<view class="text-row">
 						个人信息
 					</view>
 					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
 				</view>
 			</view>
+			<view class="col">
+				<view class="scell" @tap='navigateTo("dissertationMt")'>
+					<view class="text-row">
+						论文维护
+					</view>
+					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+				</view>
+				<view class="view-line"></view>
+				<view class="scell" @tap='navigateTo("monographMt")'>
+					<view class="text-row">
+						专著维护
+					</view>
+					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+				</view>
+				<view class="view-line"></view>
+				<view class="scell" @tap='navigateTo("projectMt")'>
+					<view class="text-row">
+						项目维护
+					</view>
+					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+				</view>
+				<view class="view-line"></view>
+				<view class="scell" @tap='navigateTo("incentiveMt")'>
+					<view class="text-row" >
+						奖励维护
+					</view>
+					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+				</view>
+				<view class="view-line"></view>
+				<view class="scell" @tap='navigateTo("patentMt")'>
+					<view class="text-row">
+						专利维护
+					</view>
+					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+				</view>
+			</view>
 			<view class="btn-row">
 					<button type="default" class="primary" @tap="bindLogout">
-					注销
+					解除账号绑定
 					</button>
 				</view>
 			
@@ -79,6 +108,12 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
+			navigateTo(page){
+				var url = '../'+page+'/'+page;
+				uni.navigateTo({
+					url: url
+				});
+			},
 			
 			toLogin(){
 				uni.navigateTo({

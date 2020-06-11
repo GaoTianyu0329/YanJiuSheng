@@ -32,6 +32,30 @@
             "path" : "pages/notice/notice",
             "style" : {}
         }
+        ,{
+            "path" : "pages/userInfo/userInfo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/dissertationMt/dissertationMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/monographMt/monographMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/projectMt/projectMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/incentiveMt/incentiveMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/patentMt/patentMt",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",
