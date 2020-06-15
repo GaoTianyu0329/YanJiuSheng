@@ -36,15 +36,20 @@
 					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
 				</view>
 			</view>
-			<view class="col">
-				<view class="scell" @tap='navigateTo("dissertationMt")'>
-					<view class="text-row">
-						论文维护
+			<view class="col" >
+				<view v-for="(item,index) in list2" :key="index" @click="navigateTo(item.path)">
+					<view class="scell" >
+						<view class="text-row">
+						{{item.title}}
+						</view>
+						<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+					
 					</view>
-					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
+					<view v-if="index != 4" class="view-line"></view>
 				</view>
-				<view class="view-line"></view>
-				<view class="scell" @tap='navigateTo("monographMt")'>
+				
+				
+				<!-- <view class="scell" @tap='navigateTo("monographMt")'>
 					<view class="text-row">
 						专著维护
 					</view>
@@ -70,7 +75,7 @@
 						专利维护
 					</view>
 					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
-				</view>
+				</view> -->
 			</view>
 			<view class="btn-row">
 					<button type="default" class="primary" @tap="bindLogout">
@@ -99,7 +104,33 @@
 		
 		data() {
 			return {
-				
+				list2: [
+					{
+						
+						title: '申请论文维护',
+						path: '/pages/function/4dissertationMt/4dissertationMt'
+					},
+					{
+						
+						title: '申请专著维护',
+						path: '/pages/function/5monographMt/5monographMt'
+					},
+					{
+						
+						title: '申请项目维护',
+						path: '/pages/function/6projectMt/6projectMt'
+					},
+					{
+						
+						title: '申请专利维护',
+						path: '/pages/function/7patentMt/7patentMt'
+					},
+					{
+						
+						title: '申请奖励维护',
+						path: '/pages/function/8incentiveMt/8incentiveMt'
+					},
+				],
 			}
 		},
 		onShow() {
@@ -109,9 +140,9 @@
 		methods: {
 			...mapMutations(['logout']),
 			navigateTo(page){
-				var url = '../'+page+'/'+page;
+				// var url = '../'+page+'/'+page;
 				uni.navigateTo({
-					url: url
+					url: page
 				});
 			},
 			

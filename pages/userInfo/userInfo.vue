@@ -95,18 +95,14 @@
 				<view class="title">
 					性别
 				</view>
-				<view class="title">
-					男
-				</view>
+				<input  class="text-area" placeholder="性别" v-bind:value="gender"/>
 			</view>
 			<view class="view-line"/>
 			<view class="scell">
 				<view class="title">
 					年龄
 				</view>
-				<view class="title">
-					25
-				</view>
+				<input class="text-area" placeholder="年龄" v-bind:value="age"/>
 			</view>
 			<view class="view-line"/>
 			<view class="scell">
@@ -161,8 +157,8 @@
 			return {
 				teacherId: "",
 				name:"",
-				gender:"",//性别
-				age:"",//年龄
+				gender:'男',//性别
+				age:'25',//年龄
 				rank:"", //职称
 				direction:"",//研究方向
 				eduback:"",//教育背景
