@@ -13,7 +13,9 @@ const store = new Vuex.Store({
 		userName: "",
 		teacherId: "",
 		openId: "",
-		pwd:""
+		pwd:"",
+		token:"",
+		toChangeInfo:false
 	},
 	mutations: {
 		init(state,data){
@@ -23,6 +25,7 @@ const store = new Vuex.Store({
 			state.hasLogin = data.hasLogin;
 			state.teacherId = data.teacherId;
 			state.pwd = data.pwd;
+			// state.token = data.token;
 		},
 		login(state, data) {
 			// console.log(data)
@@ -31,6 +34,7 @@ const store = new Vuex.Store({
 			
 			state.teacherId = data.teacherId || '';
 			state.pwd = data.pwd || '';
+			// state.token = data.token;
 			
 		},
 		logout(state) {
@@ -38,7 +42,10 @@ const store = new Vuex.Store({
 			state.hasLogin = false;
 			state.teacherId = "";
 			state.pwd = '';
-			
+			// state.token = '';
+		},
+		changeInfo(state){
+			state.toChangeInfo = !state.toChangeInfo;
 		}
 	}
 })

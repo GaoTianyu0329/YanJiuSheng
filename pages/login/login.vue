@@ -236,6 +236,14 @@
 </script>
 
 <style>
+	
+	.content {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		background-color: #FFFFFF;
+		padding: 10px;
+	}
 	.action-row {
 		display: flex;
 		flex-direction: row;
