@@ -56,6 +56,74 @@
             "path" : "pages/patentMt/patentMt",
             "style" : {}
         }
+        ,{
+            "path" : "pages/function/1teacherInfo/1teacherInfo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/2studentInfo/2studentInfo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/3studentPlan/3studentPlan",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/4dissertationMt/4dissertationMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/5monographMt/5monographMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/6projectMt/6projectMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/7patentMt/7patentMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/8incentiveMt/8incentiveMt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/9recruit/9recruit",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/10recruitTeam/10recruitTeam",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/11guaAppVerify/11guaAppVerify",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/12exReviewDissVerify/12exReviewDissVerify",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/13guaDissVerify/13guaDissVerify",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/14sponGovVerify/14sponGovVerify",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/15interConVerify/15interConVerify",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/16abroadAppVerify/16abroadAppVerify",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/function/17returnChaVerify/17returnChaVerify",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",
