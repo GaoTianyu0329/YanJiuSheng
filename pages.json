@@ -18,7 +18,7 @@
 		}, {
 			"path": "pages/pwd/pwd",
 			"style": {
-				"navigationBarTitleText": "找回密码"
+				"navigationBarTitleText": "修改密码"
 			}
 		}, {
 			"path": "pages/user/user",

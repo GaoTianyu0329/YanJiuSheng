@@ -6,7 +6,7 @@
 					姓名
 				</view>
 				<view class="title">
-					高天宇
+					{{name}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -15,7 +15,7 @@
 					教师号
 				</view>
 				<view class="title">
-					123456
+					{{teacherId}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -24,7 +24,7 @@
 					性别
 				</view>
 				<view class="title">
-					男
+					{{gender}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -33,7 +33,7 @@
 					年龄
 				</view>
 				<view class="title">
-					25
+					{{age}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -42,7 +42,7 @@
 					职称
 				</view>
 				<view class="title">
-					教授
+					{{rank}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -51,7 +51,7 @@
 					研究方向
 				</view>
 				<view class="title">
-					大数据
+					{{direction}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -60,7 +60,7 @@
 					教育背景
 				</view>
 				<view class="title">
-					山东大学
+					{{eduback}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -78,7 +78,7 @@
 					姓名
 				</view>
 				<view class="title">
-					高天宇
+					{{name}}
 				</view>
 			</view>
 			<view class="view-line"/>
@@ -87,56 +87,59 @@
 					教师号
 				</view>
 				<view class="title">
-					123456
+					{{teacherId}}
 				</view>
 			</view>
 			<view class="view-line"/>
-			<view class="scell">
-				<view class="title">
-					性别
+			<from >
+				<view class="scell">
+					<view class="title">
+						性别
+					</view>
+					<input  class="text-area" placeholder="性别" v-model="gender"/>
 				</view>
-				<input  class="text-area" placeholder="性别" v-bind:value="gender"/>
-			</view>
-			<view class="view-line"/>
-			<view class="scell">
-				<view class="title">
-					年龄
+				<view class="view-line"/>
+				<view class="scell">
+					<view class="title">
+						年龄
+					</view>
+					<input class="text-area" type="number" placeholder="年龄" v-model="age"/>
 				</view>
-				<input class="text-area" placeholder="年龄" v-bind:value="age"/>
-			</view>
-			<view class="view-line"/>
-			<view class="scell">
-				<view class="title">
-					职称
+				<view class="view-line"/>
+				<view class="scell">
+					<view class="title">
+						职称
+					</view>
+					<input class="text-area" placeholder="职称" v-model="rank"/>
+					
 				</view>
-				<input class="text-area" placeholder="职称" value="教授"/>
+				<view class="view-line"/>
+				<view class="scell">
+					<view class="title">
+						研究方向
+					</view>
+					<input class="text-area" placeholder="研究方向" v-model="direction"/>
+				</view>
+				<view class="view-line"/>
+				<view class="scell">
+					<view class="title">
+						教育背景
+					</view>
+					<input class="text-area" placeholder="教育背景" v-model="eduback"/>
+				</view>
+				<view class="view-line"/>
 				
-			</view>
-			<view class="view-line"/>
-			<view class="scell">
-				<view class="title">
-					研究方向
+				
+				<view class="btn-row">
+					<button type="primary" class="primary" @tap='cancel()'>
+						取消
+					</button>
+					<button type="primary" class="primary"@tap='submit()' >
+						提交
+					</button>
 				</view>
-				<input class="text-area" placeholder="研究方向" value="大数据"/>
-			</view>
-			<view class="view-line"/>
-			<view class="scell">
-				<view class="title">
-					教育背景
-				</view>
-				<input class="text-area" placeholder="教育背景" value="山东大学"/>
-			</view>
-			<view class="view-line"/>
+			</from>
 			
-			
-			<view class="btn-row">
-				<button type="default" class="primary" @tap='cancel()'>
-					取消
-				</button>
-				<button type="default" class="primary">
-					提交
-				</button>
-			</view>
 		</view>
 		
 	</view>
@@ -148,6 +151,7 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
+	import mInput from '../../components/m-input.vue'
 	
 	
 	export default {
@@ -155,13 +159,21 @@
 		
 		data() {
 			return {
-				teacherId: "",
-				name:"",
+				teacherId: "123456",
+				name:"高天宇",
+				
 				gender:'男',//性别
 				age:'25',//年龄
-				rank:"", //职称
-				direction:"",//研究方向
-				eduback:"",//教育背景
+				rank:"学生", //职称
+				direction:"大数据",//研究方向
+				eduback:"山东大学",//教育背景
+				temp_data:{
+					gender:'',//性别
+					age:'',//年龄
+					rank:"", //职称
+					direction:"",//研究方向
+					eduback:"",//教育背景
+				}
 				
 				
 			}
@@ -171,14 +183,90 @@
 			change(){
 				
 				this.changeInfo();
+				this.temp_data.gender = this.gender;
+				this.temp_data.age = this.age;
+				this.temp_data.rank = this.rank;
+				this.temp_data.direction = this.direction;
+				this.temp_data.eduback = this.eduback;
 				// this.$router.go(0);
 				console.log(this.toChangeInfo);
 			},
 			cancel(){
-				
+				this.gender = this.temp_data.gender;
+				this.age = this.temp_data.age;
+				this.rank = this.temp_data.rank;
+				this.direction = this.temp_data.direction;
+				this.eduback = this.temp_data.eduback;
 				this.changeInfo();
 				// this.$router.go(0);
 				console.log(this.change);
+			},
+			submit(){
+				if (this.gender.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '性别不能为空'
+					});
+					return;
+				}
+				if (this.gender != '男'&& this.gender != '女') {
+					uni.showToast({
+						icon: 'none',
+						title: '性别输入错误'
+					});
+					return;
+				}
+				if (this.age.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '年龄不能为空'
+					});
+					return;
+				}
+				if (this.rank.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '职称不能为空'
+					});
+					return;
+				}
+				if (this.direction.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '研究方向不能为空'
+					});
+					return;
+				}
+				if (this.eduback.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '教育背景不能为空'
+					});
+					return;
+				}
+				// uni.request({
+				// 	url:"",
+				// 	data:{
+						
+				// 	},
+				// 	method:'POST',
+				// 	header:{
+				// 		conent-type:'application/json'
+				// 	},
+				// 	success:(res)=>{
+						
+				// 	}
+				// })
+				const isSuccess = true;
+				if(isSuccess){
+					this.changeInfo();
+					uni.showToast({
+						icon:'none',
+						title:'修改成功'
+					});
+				}
+				
+				
 			}
 		}
 	}

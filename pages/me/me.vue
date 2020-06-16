@@ -23,13 +23,13 @@
 			</view>
 			<view class="col">
 				<view class="scell">
-					<view class="text-row" @tap='navigateTo("dissertation")'>
+					<view class="text-row" @tap='navigateTo("/pages/pwd/pwd")'>
 						密码修改
 					</view>
 					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
 				</view>
 				<view class="view-line"></view>
-				<view class="scell" @tap="navigateTo('userInfo')">
+				<view class="scell" @tap="navigateTo('/pages/userInfo/userInfo')">
 					<view class="text-row">
 						个人信息
 					</view>
