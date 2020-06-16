@@ -145,6 +145,29 @@
 				uni.login({
 					provider: value,
 					success: (res) => {
+						// if (res.code) {
+						//       //发起网络请求
+						//       uni.request({
+						//         url: '',
+						//         data: {
+						//           code: res.code
+						//         },
+						// 		success:(infoRes) => {
+						// 			this.storageData('openId',infoRes.userInfo.nickName);
+						// 			const data = {
+						// 				userName: infoRes.userInfo.nickName,
+										
+						// 				teacherId: userData.teacherId,
+						// 				pwd:userData.password,
+						// 				// token:''
+						// 			};
+						// 			this.toMain(data);//后端登录完成后改为教师号
+						// 		}
+						//       });
+						// } else {
+						//   console.log('登录失败！' + res.errMsg)
+						// }
+						console.log(res.code);
 						uni.getUserInfo({
 							provider: value,
 							success: (infoRes) => {
@@ -159,12 +182,9 @@
 									userName: infoRes.userInfo.nickName,
 									
 									teacherId: userData.teacherId,
-									pwd:userData.password
-									
-									
+									pwd:userData.password	
 								}
 								this.toMain(data);//后端登录完成后改为教师号
-								
 							},
 							fail() {
 								uni.showToast({
