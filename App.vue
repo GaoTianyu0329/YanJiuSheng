@@ -143,7 +143,7 @@
 	}
 
 	.input-row .title {
-		width: 72px;
+		width: 100px;
 		padding-left: 15px;
 	}
 
@@ -172,5 +172,14 @@
 		border-radius: 8px;
 		text-decoration-color: #000;
 		color: #d60016;
+	}
+	.view-line{
+		margin-left:auto; 
+		margin-right:auto;
+		
+		width: 96%;
+		height: 1px;
+		background-color: #000000;
+		
 	}
 </style>

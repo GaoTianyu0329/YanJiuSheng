@@ -36,26 +36,8 @@
             "path" : "pages/userInfo/userInfo",
             "style" : {}
         }
-        ,{
-            "path" : "pages/dissertationMt/dissertationMt",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/monographMt/monographMt",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/projectMt/projectMt",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/incentiveMt/incentiveMt",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/patentMt/patentMt",
-            "style" : {}
-        }
+        
+        
         ,{
             "path" : "pages/function/1teacherInfo/1teacherInfo",
             "style" : {}
