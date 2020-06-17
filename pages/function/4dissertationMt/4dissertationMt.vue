@@ -47,7 +47,7 @@
 		methods: {
 			navigateTo(item){
 				var url = '../../details/details?';
-				url = url + 'id='+item.id+'&name='+item.name+'&time='+item.time;
+				url = url + "kind=0&id="+item.id+'&name='+item.name+'&time='+item.time;
 				uni.navigateTo({
 					url: url
 				});
