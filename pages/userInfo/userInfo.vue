@@ -155,7 +155,7 @@
 	
 	
 	export default {
-		computed: mapState(['toChangeInfo']),
+		computed: mapState(['toChangeInfo','token']),
 		
 		data() {
 			return {
@@ -167,12 +167,14 @@
 				rank:"学生", //职称
 				direction:"大数据",//研究方向
 				eduback:"山东大学",//教育背景
+				award:"",//获奖信息
 				temp_data:{
 					gender:'',//性别
 					age:'',//年龄
 					rank:"", //职称
 					direction:"",//研究方向
 					eduback:"",//教育背景
+					award:'',
 				}
 				
 				
@@ -188,7 +190,7 @@
 				this.temp_data.rank = this.rank;
 				this.temp_data.direction = this.direction;
 				this.temp_data.eduback = this.eduback;
-				// this.$router.go(0);
+				this.temp_data.award = this.award;
 				console.log(this.toChangeInfo);
 			},
 			cancel(){
@@ -197,8 +199,9 @@
 				this.rank = this.temp_data.rank;
 				this.direction = this.temp_data.direction;
 				this.eduback = this.temp_data.eduback;
+				this.award = this.temp_data.award;
 				this.changeInfo();
-				// this.$router.go(0);
+				
 				console.log(this.change);
 			},
 			submit(){
@@ -244,19 +247,32 @@
 					});
 					return;
 				}
-				// uni.request({
-				// 	url:"",
-				// 	data:{
-						
-				// 	},
-				// 	method:'POST',
-				// 	header:{
-				// 		conent-type:'application/json'
-				// 	},
-				// 	success:(res)=>{
-						
-				// 	}
-				// })
+				const newData = {
+					gender:this.gender,
+					age:this.age,
+					rank:this.rank,
+					direction:this.direction,
+					eduback:this.eduback,
+					
+				};
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/tinfo',
+					data:newData,
+					method:'POST',
+					
+					success:(res)=>{
+						const resData = res.data;
+						if(resData.ststus == 'success'){
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
 				const isSuccess = true;
 				if(isSuccess){
 					this.changeInfo();
@@ -266,8 +282,29 @@
 					});
 				}
 				
-				
 			}
+		
+		},
+		onLoad: (option) => {
+			console.log(this.token);
+			uni.request({
+				method:'POST',
+				url:'http://112.124.22.241:8080/tinfo',
+				data:{
+					token:this.token
+				},
+				success: (res) => {
+					const resData = res.data;
+					if(resData.status == 'success'){
+						console.log(resData.result);
+					}else{
+						console.log(resData.reason);
+					}
+				},
+				fail: (res) => {
+					console.log(res.errMsg);
+				}
+			})
 		}
 	}
 </script>

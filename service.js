@@ -20,6 +20,19 @@ const addUser = function(userInfo) {
 	uni.setStorageSync(USERS_KEY, JSON.stringify(users));
 }
 
+const post = function(url,data){
+	uni.request({
+		method:'POST',
+		url:url,
+		data:data,
+		success: (res) => {
+			return res.data;
+		},
+		fail: (res) => {
+			console.log();
+		}
+	})
+}
 export default {
 	getUsers,
 	addUser

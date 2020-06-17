@@ -149,12 +149,6 @@
 								title: resData.reason,
 							});
 						}
-						// this.storageData('openId',infoRes.userInfo.nickName);
-						// const data = {
-						// userName: infoRes.userInfo.nickName,
-						// teacherId: userData.teacherId,
-						// pwd:userData.password,
-						// token:''
 					},
 					fail:(res) =>{
 						console.log(res);
@@ -172,36 +166,40 @@
 					provider: value,
 					success: (res) => {
 						
-						// const data = {
-						// 	userName: 'aaa',
-							
-						// 	teacherId: userData.teacherId,
-						// 	pwd:userData.password	
-						// }
-						// this.toMain(data);//后端登录完成后改为教师号
 						if (res.code) {
 						      //发起网络请求
-						      uni.request({
+							console.log(res.code);
+						    uni.request({
 						        url: 'http://112.124.22.241:8080/bind',
 						        data: {
 						          token:this.token,
+								  code:res.code
 						        },
 								success:(infoRes) => {
-									this.storageData('openId',infoRes.userInfo.nickName);
-									const data = {
-										userName: infoRes.userInfo.nickName,
-										
-										teacherId: userData.teacherId,
-										pwd:userData.password,
-										// token:''
-									};
-									this.toMain(data);//后端登录完成后改为教师号
+									const responseData = infoRes.data;
+									if(responseData.status == 'success'){
+										this.storageData('openId',responseData.openid);
+										const data = {
+											userName: responseData.openid || '',
+											
+											teacherId: userData.teacherId,
+											pwd:userData.password,
+											// token:''
+										};
+										this.toMain(data);//后端登录完成后改为教师号
+									}else{
+										uni.showToast({
+											icon: 'none',
+											title: responseData.reason,
+										});
+									}
+									
 								}
-						      });
+						    });
 						} else {
 						  console.log('登录失败！' + res.errMsg)
 						}
-						console.log(res.code);
+						
 					// 	uni.getUserInfo({
 					// 		provider: value,
 					// 		success: (infoRes) => {
