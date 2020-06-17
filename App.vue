@@ -23,12 +23,14 @@
 				const userName = this.getStorageData("userName") || "";
 				const hasLogin = this.getStorageData("hasLogin") || false;
 				const pwd = this.getStorageData("pwd");
+				const token = this.getStorageData('token');
 				const data = {
 					teacherId:teacherId,
 					openId:openId,
 					userName:userName,
 					hasLogin:hasLogin,
-					pwd:pwd
+					pwd:pwd,
+					token:token
 				}
 				this.init(data)
 				console.log("init"+data.hasLogin);

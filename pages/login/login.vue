@@ -52,7 +52,7 @@
 				isDevtools: false,
 			}
 		},
-		computed: mapState(['forcedLogin']),
+		computed: mapState(['forcedLogin','token']),
 		methods: {
 			...mapMutations(['login']),
 			initProvider() {
@@ -112,87 +112,121 @@
 					teacherId: this.account,
 					password: this.password
 				};
-				const validUser = data.teacherId === "123456" && data.password === "123456";;
-				if (validUser) {
-					this.storageData("teacherId",data.teacherId);
-					this.storageData("pwd",data.password);
-					this.storageData("hasLogin",true);
-					uni.showModal({
-						title: '登录成功',
-						content: '是否与微信账号关联',
-						
-						showCancel: true,
-						success: (res) => {
-							if (res.confirm) {
-								this.oauth(this.providerList[0].value,data);
+				uni.request({
+					url: 'http://112.124.22.241:8080/login',
+					data: {
+						u:data.teacherId,
+						p:data.password
+					},
+					method:'POST',
+					success:(res) => {
+						console.log(res);
+						const resData = res.data;
+						if(resData.status == 'success'){
+							this.storageData("teacherId",data.teacherId);
+							this.storageData("pwd",data.password);
+							this.storageData("hasLogin",true);
+							this.storageData('token',resData.result.token)
+							uni.showModal({
+								title: '登录成功',
+								content: '是否与微信账号关联',
 								
-							}else if(res.cancel){
-								this.toMain(data);
-								
-							}
+								showCancel: true,
+								success: (res1) => {
+									if (res1.confirm) {
+										this.oauth(this.providerList[0].value,data);
+										
+									}else if(res1.cancel){
+										this.toMain(data);
+										
+									}
+								}
+							});
+							
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: resData.reason,
+							});
 						}
-					});
-					// this.toMain(this.account);
-				} else {
-					uni.showToast({
-						icon: 'none',
-						title: '用户账号或密码不正确',
-					});
-				}
+						// this.storageData('openId',infoRes.userInfo.nickName);
+						// const data = {
+						// userName: infoRes.userInfo.nickName,
+						// teacherId: userData.teacherId,
+						// pwd:userData.password,
+						// token:''
+					},
+					fail:(res) =>{
+						console.log(res);
+						uni.showToast({
+							icon: 'none',
+							title: res.errMsg,
+						});
+					}
+				});
+				
 			},
 			oauth(value,userData) {
 				
 				uni.login({
 					provider: value,
 					success: (res) => {
-						// if (res.code) {
-						//       //发起网络请求
-						//       uni.request({
-						//         url: '',
-						//         data: {
-						//           code: res.code
-						//         },
-						// 		success:(infoRes) => {
-						// 			this.storageData('openId',infoRes.userInfo.nickName);
-						// 			const data = {
-						// 				userName: infoRes.userInfo.nickName,
-										
-						// 				teacherId: userData.teacherId,
-						// 				pwd:userData.password,
-						// 				// token:''
-						// 			};
-						// 			this.toMain(data);//后端登录完成后改为教师号
-						// 		}
-						//       });
-						// } else {
-						//   console.log('登录失败！' + res.errMsg)
+						
+						// const data = {
+						// 	userName: 'aaa',
+							
+						// 	teacherId: userData.teacherId,
+						// 	pwd:userData.password	
 						// }
-						console.log(res.code);
-						uni.getUserInfo({
-							provider: value,
-							success: (infoRes) => {
-								/**
-								 * 实际开发中，获取用户信息后，需要将信息上报至服务端。
-								 * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
-								 */
-								// console.log(infoRes.userInfo.nickName)
-								this.storageData('userName',infoRes.userInfo.nickName)
-								this.storageData('openId',infoRes.userInfo.nickName)
-								const data = {
-									userName: infoRes.userInfo.nickName,
-									
-									teacherId: userData.teacherId,
-									pwd:userData.password	
+						// this.toMain(data);//后端登录完成后改为教师号
+						if (res.code) {
+						      //发起网络请求
+						      uni.request({
+						        url: 'http://112.124.22.241:8080/bind',
+						        data: {
+						          token:this.token,
+						        },
+								success:(infoRes) => {
+									this.storageData('openId',infoRes.userInfo.nickName);
+									const data = {
+										userName: infoRes.userInfo.nickName,
+										
+										teacherId: userData.teacherId,
+										pwd:userData.password,
+										// token:''
+									};
+									this.toMain(data);//后端登录完成后改为教师号
 								}
-								this.toMain(data);//后端登录完成后改为教师号
-							},
-							fail() {
-								uni.showToast({
-									icon: 'none',
-									title: '登陆失败'
-								});
-							}
-						});
+						      });
+						} else {
+						  console.log('登录失败！' + res.errMsg)
+						}
+						console.log(res.code);
+					// 	uni.getUserInfo({
+					// 		provider: value,
+					// 		success: (infoRes) => {
+					// 			/**
+					// 			 * 实际开发中，获取用户信息后，需要将信息上报至服务端。
+					// 			 * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
+					// 			 */
+					// 			// console.log(infoRes.userInfo.nickName)
+					// 			this.storageData('userName',infoRes.userInfo.nickName)
+					// 			this.storageData('openId',infoRes.userInfo.nickName)
+					// 			const data = {
+					// 				userName: infoRes.userInfo.nickName,
+									
+					// 				teacherId: userData.teacherId,
+					// 				pwd:userData.password	
+					// 			}
+					// 			this.toMain(data);//后端登录完成后改为教师号
+					// 		},
+					// 		fail() {
+					// 			uni.showToast({
+					// 				icon: 'none',
+					// 				title: '登陆失败'
+					// 			});
+					// 		}
+					// 	});
 					},
 					fail: (err) => {
 						console.error('授权登录失败：' + JSON.stringify(err));
