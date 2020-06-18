@@ -1,10 +1,30 @@
 <template>
-	<view>
-		{{id}},{{name}},{{time}}
+	<view class="content">
+		<view v-if="!isChange">
+			<view class="text-title">
+				{{name}}
+			</view>
+			<view class="text-time">
+				{{time}}
+			</view>
+			<view class="text-box" scroll-y="true">
+			    <text class="flex flex-direction">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+				</text>
+			</view>
+		</view>
+		<view v-if="isChange">
+			
+		</view>
+		
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -12,8 +32,10 @@
 				id:'',
 				name:'',
 				time:'',
+				isChange:false
 			}
 		},
+		computed: mapState(['token']),
 		methods: {
 			setTitle(title){
 				
@@ -71,5 +93,46 @@
 </script>
 
 <style>
-
+	.content{
+		width: 100%;
+	}
+	.image-arrow{
+		width: 28px;
+		margin-right: 8rpx;
+		height: 32px;
+		margin-top: auto;
+		margin-bottom: auto;
+		
+		/* align-self: center; */
+		
+	}
+	.text-row{
+		
+		width: 88%;
+		margin-right: 12rpx;
+		margin-top: auto;
+		margin-bottom: auto;
+		
+		/* align-self: center; */
+		
+		
+	}
+	.scell{
+		display: flex;
+		margin-top: 12rpx;
+		width: 92%;
+		height: 72px;
+		margin-left: auto;
+		margin-right: auto;
+		/* background-color: #4CD964; */
+		
+		/* padding: 6rpx,8rpx,6rpx,8rpx; */
+	}
+	.text-title{
+		font-size: 16px;
+	}
+	.text-time{
+		font-size: 10px;
+		color: #666666;
+	}
 </style>
