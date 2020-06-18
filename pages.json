@@ -122,6 +122,10 @@
             "path" : "pages/details/details",
             "style" : {}
         }
+        ,{
+            "path" : "pages/AchMaintenance/AchMaintenance",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",

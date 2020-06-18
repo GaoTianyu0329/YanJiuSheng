@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<scroll-view>
+		<scroll-view >
 			<view v-for="(item,index) in dataList":key='index' @tap=navigateTo(item)>
 				<view class="scell" >
 					<view class="text-row" >
@@ -12,7 +12,7 @@
 						</view>
 					</view>
 					
-					<image class="image-arrow" mode="widthFix" src="../../../static/img/arrow.png"></image>
+					<image class="image-arrow" mode="widthFix" src="../../static/img/arrow.png"></image>
 				</view>
 				<view v-if="index != (dataList.length-1)" class="view-line"></view>
 			</view>
@@ -22,16 +22,10 @@
 </template>
 
 <script>
-	
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex'
-	
 	export default {
 		data() {
 			return {
-				triggered: false,
+				kind:'',
 				dataList: [
 					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
 					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
@@ -51,48 +45,67 @@
 					]
 			}
 		},
-		computed: mapState(['token']),
 		methods: {
+			setTitle(title){
+				
+				uni.setNavigationBarTitle({
+				title: title
+				});
+			},
 			navigateTo(item){
-				var url = '../../details/details?';
-				url = url + "kind=0&id="+item.id+'&name='+item.name+'&time='+item.time;
+				var url = 'pages/details/details?';
+				url = url + "kind="+this.kind+"&id="+item.id+'&name='+item.name+'&time='+item.time;
 				uni.navigateTo({
 					url: url
 				});
 			},
-			getData(){
-				uni.request({
-					method:'POST',
-					url:'http://112.124.22.241:8080/',
-					data:{
-						token:this.token,
-						opration:1,
-					},
-					success: (res) => {
-						const resData = res.data;
-						if(resData.status == 'success'){
-							console.log(resData.result);
-						}else{
-							console.log(resData.reason);
-						}
-					},
-					fail: (res) => {
-						console.log(res.errMsg);
-					}
-				});
-			},
+		},
+		onReady: () => {
+			switch(this.kind){
+				case '0':
+					this.setTitle('论文维护');
+					break;
+				case '1':
+					this.setTitle('专著维护');
+					break;
+				case '2':
+					this.setTitle('项目维护');
+					break;
+				case '3':
+					this.setTitle('专利维护');
+					break;
+				case '4':
+					this.setTitle('奖励维护');
+					break;
+			}
+		},
+		onLoad: function (option) {
+			switch(option.kind){
+				case '0':
+					this.setTitle('论文维护');
+					break;
+				case '1':
+					this.setTitle('专著维护');
+					break;
+				case '2':
+					this.setTitle('项目维护');
+					break;
+				case '3':
+					this.setTitle('专利维护');
+					break;
+				case '4':
+					this.setTitle('奖励维护');
+					break;
+				
+			};
+			this.kind = option.kind;
 			
-		},
-		 onLoad() {
-		    this._freshing = false;
-		    
-		},
-		
+		}
 	}
 </script>
 
 <style>
-	.content{
+.content{
 		width: 100%;
 	}
 	.image-arrow{

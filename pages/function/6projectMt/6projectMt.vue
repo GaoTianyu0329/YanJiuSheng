@@ -51,7 +51,28 @@
 				uni.navigateTo({
 					url: url
 				});
+			},getData(){
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/',
+					data:{
+						token:this.token,
+						opration:1,
+					},
+					success: (res) => {
+						const resData = res.data;
+						if(resData.status == 'success'){
+							console.log(resData.result);
+						}else{
+							console.log(resData.reason);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				});
 			},
+			
 		}
 	}
 </script>

@@ -71,7 +71,7 @@
 					{
 						pic: '../../static/img/function/ia_100000011.png',
 						title: '教师信息维护',
-						path: '/pages/function/1teacherInfo/1teacherInfo'
+						path: '/pages/userInfo/userInfo'
 					},
 					{
 						pic: '../../static/img/function/ia_100000012.png',
