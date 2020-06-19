@@ -1,8 +1,10 @@
 <script>
 	import {
+		mapState,
 		mapMutations
 	} from 'vuex'
 	export default {
+		computed: mapState(['hasLogin','token','openId']),
 		methods:{
 			...mapMutations(['init']),
 			getStorageData(key){
@@ -10,15 +12,14 @@
 				try{
 					result = uni.getStorageSync(key);
 				}catch(e){
-					
+					console.log(e);
 				};
-				
 				
 				return result;
 				
 			},
 			initState(){
-				const teacherId = this.getStorageData("teacherId") || "";
+				const   teacherId = this.getStorageData("teacherId") || "";
 				const openId = this.getStorageData("openId") || "";
 				const userName = this.getStorageData("userName") || "";
 				const hasLogin = this.getStorageData("hasLogin") || false;
@@ -38,6 +39,49 @@
 		},
 		onLaunch: function() {
 			console.log('App Launch');
+			const hasLogin = this.getStorageData("hasLogin") || false;
+			const openId = this.getStorageData("openId") || "";
+			if(openId){
+				
+				uni.request({
+					url: 'http://112.124.22.241:8080/login',
+					data: {
+						openid:openId,
+					},
+					method:'POST',
+					success: (loginRes) => {
+						const resData = loginRes.data;
+						console.log(resData);
+					},
+					fail: (loginRes) => {
+						console.log(loginRes)
+					}
+				});
+			}else{
+				uni.login({
+					provider:'weixin',
+					success: (res) => {
+						const code = res.code;
+						uni.request({
+							url: 'http://112.124.22.241:8080/login',
+							data: {
+								code:code,
+							},
+							method:'POST',
+							success: (loginRes) => {
+								const resData = loginRes.data;
+								console.log(resData);
+							},
+							fail: (loginRes) => {
+								console.log(loginRes)
+							}
+						})
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
+			}
 			this.initState()
 		},
 		onShow: function() {
