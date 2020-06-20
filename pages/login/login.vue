@@ -50,9 +50,10 @@
 				password: '',
 				positionTop: 0,
 				isDevtools: false,
+				token:''
 			}
 		},
-		computed: mapState(['forcedLogin','token']),
+		computed: mapState(['forcedLogin']),
 		methods: {
 			...mapMutations(['login']),
 			initProvider() {
@@ -127,6 +128,8 @@
 							this.storageData("pwd",data.password);
 							this.storageData("hasLogin",true);
 							this.storageData('token',resData.result.token);
+							this.token = resData.result.token;
+							
 							uni.showModal({
 								title: '登录成功',
 								content: '是否与微信账号关联',
@@ -178,6 +181,7 @@
 						        },
 								success:(infoRes) => {
 									const responseData = infoRes.data;
+									console.log(responseData);
 									if(responseData.status == 'success'){
 										this.storageData('openId',responseData.openid);
 										const data = {

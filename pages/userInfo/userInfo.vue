@@ -159,15 +159,16 @@
 		
 		data() {
 			return {
-				teacherId: "123456",
-				name:"高天宇",
+				teacherId: "",
+				name:"",
 				
-				gender:'男',//性别
-				age:'25',//年龄
-				rank:"学生", //职称
-				direction:"大数据",//研究方向
-				eduback:"山东大学",//教育背景
+				gender:'',//性别
+				age:'',//年龄
+				rank:"", //职称
+				direction:"",//研究方向
+				eduback:"",//教育背景
 				award:"",//获奖信息
+				token:'',
 				temp_data:{
 					gender:'',//性别
 					age:'',//年龄
@@ -248,6 +249,7 @@
 					return;
 				}
 				const newData = {
+					token:this.token,
 					gender:this.gender,
 					age:this.age,
 					rank:this.rank,
@@ -298,27 +300,30 @@
 		},
 		onShow(){
 			var that = this;
-			// this.token = getStorageData('token');
-			console.log(that);
+			this.token = this.getStorageData('token');
+			
 			
 			uni.request({
 				method:'POST',
 				url:'http://112.124.22.241:8080/tinfo',
 				data:{
-					token:'2'
+					token:this.token
 				},
 				success: (res) => {
 					console.log(res)
 					const resData = res.data;
+					
 					if(resData.status == 'success'){
-						console.log(that);
-						that.teacherId = resData.id;
-						that.age = resData.age;
-						that.gender = resData.gender;
-						that.rank = resData.rank;
-						that.direction = resData.direction;
-						that.eduback = resData.eduback;
-						that.award = resData.award;
+						const result = resData.result;
+						this.name = result.name;
+						this.teacherId = result.id;
+						this.age = result.age;
+						this.gender = result.gender;
+						this.rank = result.rank;
+						this.direction = result.dirction;
+						this.eduback = result.eduback;
+						this.award = result.award;
+						
 					}else{
 						console.log(resData.reason);
 					}

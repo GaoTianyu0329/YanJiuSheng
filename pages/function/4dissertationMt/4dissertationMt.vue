@@ -5,7 +5,10 @@
 				<view class="scell" >
 					<view class="text-row" >
 						<view class="text-title">
-							{{item.name}}
+							{{item.n}}
+						</view>
+						<view class="text-time">
+							{{item.time}}
 						</view>
 						<view class="text-time">
 							{{item.time}}
@@ -14,7 +17,7 @@
 					
 					<image class="image-arrow" mode="widthFix" src="../../../static/img/arrow.png"></image>
 				</view>
-				<view v-if="index != (dataList.length-1)" class="view-line"></view>
+				<view  class="view-line"></view>
 			</view>
 			
 		</scroll-view>
@@ -32,46 +35,33 @@
 		data() {
 			return {
 				triggered: false,
-				dataList: [
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					]
+				dataList: []
 			}
 		},
 		computed: mapState(['token']),
 		methods: {
 			navigateTo(item){
 				var url = '../../details/details?';
-				url = url + "kind=0&id="+item.id+'&name='+item.name+'&time='+item.time;
+				url = url + "kind=0&i="+item.i+'&n='+item.n+'&time='+item.time+'&d='+item.d,+'&personId='+item.personId;
 				uni.navigateTo({
 					url: url
 				});
 			},
+			
 			getData(){
 				uni.request({
 					method:'POST',
-					url:'http://112.124.22.241:8080/',
+					url:'http://112.124.22.241:8080/achi',
 					data:{
 						token:this.token,
-						opration:1,
+						t:1,
 					},
 					success: (res) => {
 						const resData = res.data;
 						if(resData.status == 'success'){
-							console.log(resData.result);
+							const result = resData.result;
+							this.dataList = result.list;
+							
 						}else{
 							console.log(resData.reason);
 						}
@@ -83,8 +73,9 @@
 			},
 			
 		},
-		 onLoad() {
+		 onShow() {
 		    this._freshing = false;
+			this.getData();
 		    
 		},
 		

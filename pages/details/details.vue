@@ -2,32 +2,32 @@
 	<view class="content">
 		<view v-if="!isChange">
 			<view class="text-title">
-				{{name}}
+				{{n}}
 			</view>
 			<view class="text-time">
 				{{time}}
 			</view>
 			<view class="text-box" scroll-y="true">
 			    <text class="flex flex-direction" >
-					{{detail}}
+					{{d}}
 				</text>
 			</view>
-			<view class="btn-row">
+			<!-- <view class="btn-row">
 				<button type="default" class="primary" @tap='change()'>
 					修改数据
 				</button>
 				
-			</view>
+			</view> -->
 		</view>
 		<view v-if="isChange">
 			<view class="text-title">
-				<input  class="text-area" placeholder="性别" v-model="name"/>
+				<input  class="text-area" placeholder="性别" v-model="n"/>
 			</view>
 			<view class="text-time">
 				<input  class="text-area" placeholder="性别" v-model="time"/>
 			</view>
 			<view class="text-box" scroll-y="true">
-			    <textarea class="text-area" v-model="detail">
+			    <textarea class="text-area" v-model="d">
 					
 				</textarea>
 			</view>
@@ -52,16 +52,18 @@
 	export default {
 		data() {
 			return {
-				kind:'',
-				id:'',
-				name:'',
+				t:'',
+				i:'',
+				n:'',
 				time:'',
-				detail:'aaaaaaaaaaaaaaa\naaaaaaaaaaaaaaa\naaaaaaaaaaaa',
+				d:'',
 				isChange:false,
+				openId:'',
 				temp_data:{
-					name:'',
+					n:'',
 					time:'',
-					detail:"", 
+					d:'',
+					
 					
 				}
 			}
@@ -151,11 +153,20 @@
 					});
 				}
 				
+			},
+			getPersonName(){
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/achi',
+					data:{
+						pid:this.personId,
+					},
+				})
 			}
 					
 		},
 		onReady() {
-			switch(this.kind){
+			switch(this.d){
 				case '0':
 					this.setTitle('论文详情');
 					break;
@@ -193,10 +204,11 @@
 		        // 		break;
 		        	
 		        // };
-				this.kind = option.kind;
-				this.id = option.id;
-				this.name = option.name;
+				this.d = option.kind;
+				this.i = option.i;
+				this.n = option.n;
 				this.time = option.time;
+				this.d = option.d;
 		    }
 		
 	}

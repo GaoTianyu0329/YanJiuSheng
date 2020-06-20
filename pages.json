@@ -1,11 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
-	{
-	    "path" : "pages/function/11guaAppVerify/11guaAppVerify",
-	    "style" : {
-			"disableScroll":true
-		}
-	},
+	
 		{
 			"path": "pages/main/main",
 			"style": {
@@ -95,7 +90,13 @@
         ,{
             "path" : "pages/function/10recruitTeam/10recruitTeam",
             "style" : {}
-        }
+        },
+		{
+		    "path" : "pages/function/11guaAppVerify/11guaAppVerify",
+		    "style" : {
+				"disableScroll":true
+			}
+		}
         
         ,{
             "path" : "pages/function/12exReviewDissVerify/12exReviewDissVerify",
