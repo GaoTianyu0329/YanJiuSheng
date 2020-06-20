@@ -34,7 +34,7 @@
 					token:token
 				}
 				this.init(data)
-				console.log("init"+data.hasLogin);
+				console.log("init"+token);
 			},
 		},
 		onLaunch: function() {

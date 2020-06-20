@@ -282,21 +282,43 @@
 					});
 				}
 				
-			}
+			},
+			getStorageData(key){
+				var result = "";
+				try{
+					result = uni.getStorageSync(key);
+				}catch(e){
+					console.log(e);
+				};
+				
+				return result;
+				
+			},
 		
 		},
-		onLoad: (option) => {
-			console.log(this.token);
+		onShow(){
+			var that = this;
+			// this.token = getStorageData('token');
+			console.log(that);
+			
 			uni.request({
 				method:'POST',
 				url:'http://112.124.22.241:8080/tinfo',
 				data:{
-					token:this.token
+					token:'2'
 				},
 				success: (res) => {
+					console.log(res)
 					const resData = res.data;
 					if(resData.status == 'success'){
-						console.log(resData.result);
+						console.log(that);
+						that.teacherId = resData.id;
+						that.age = resData.age;
+						that.gender = resData.gender;
+						that.rank = resData.rank;
+						that.direction = resData.direction;
+						that.eduback = resData.eduback;
+						that.award = resData.award;
 					}else{
 						console.log(resData.reason);
 					}

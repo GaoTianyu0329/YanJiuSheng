@@ -100,7 +100,7 @@
 		mapMutations
 	} from 'vuex'
 	export default {
-		computed:mapState(['forcedLogin', 'hasLogin', 'userName','teacherId','openId']),
+		computed:mapState(['forcedLogin', 'hasLogin', 'userName','teacherId','openId','token']),
 		
 		data() {
 			return {
@@ -152,16 +152,36 @@
 				});
 			},
 			bindLogout(){
-				try {
-				    uni.clearStorageSync();
-					this.logout();
-				} catch (e) {
-				    // error
-					uni.showToast({
-						icon: 'none',
-						title: '注销失败'
-					});
-				}
+				uni.request({
+					url: 'http://112.124.22.241:8080/unbind',
+					method:'POST',
+					data: {
+					  token:this.token,
+					  
+					},
+					success:(infoRes) => {
+						const responseData = infoRes.data;
+						if(responseData.status == 'success'){
+							try {
+							    uni.clearStorageSync();
+								this.logout();
+							} catch (e) {
+							    // error
+								uni.showToast({
+									icon: 'none',
+									title: '注销失败'
+								});
+							}
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: responseData.reason,
+							});
+						}
+						
+					}
+				})
+				
 				
 				
 			}

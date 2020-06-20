@@ -126,7 +126,7 @@
 							this.storageData("teacherId",data.teacherId);
 							this.storageData("pwd",data.password);
 							this.storageData("hasLogin",true);
-							this.storageData('token',resData.result.token)
+							this.storageData('token',resData.result.token);
 							uni.showModal({
 								title: '登录成功',
 								content: '是否与微信账号关联',
@@ -171,6 +171,7 @@
 							console.log(res.code);
 						    uni.request({
 						        url: 'http://112.124.22.241:8080/bind',
+								method:'POST',
 						        data: {
 						          token:this.token,
 								  code:res.code

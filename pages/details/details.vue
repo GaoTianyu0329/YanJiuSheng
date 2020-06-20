@@ -8,13 +8,37 @@
 				{{time}}
 			</view>
 			<view class="text-box" scroll-y="true">
-			    <text class="flex flex-direction">
-				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			    <text class="flex flex-direction" >
+					{{detail}}
 				</text>
+			</view>
+			<view class="btn-row">
+				<button type="default" class="primary" @tap='change()'>
+					修改数据
+				</button>
+				
 			</view>
 		</view>
 		<view v-if="isChange">
-			
+			<view class="text-title">
+				<input  class="text-area" placeholder="性别" v-model="name"/>
+			</view>
+			<view class="text-time">
+				<input  class="text-area" placeholder="性别" v-model="time"/>
+			</view>
+			<view class="text-box" scroll-y="true">
+			    <textarea class="text-area" v-model="detail">
+					
+				</textarea>
+			</view>
+			<view class="btn-row">
+				<button type="primary" class="primary" @tap='cancel()'>
+					取消
+				</button>
+				<button type="primary" class="primary"@tap='submit()' >
+					提交
+				</button>
+			</view>
 		</view>
 		
 	</view>
@@ -32,7 +56,14 @@
 				id:'',
 				name:'',
 				time:'',
-				isChange:false
+				detail:'aaaaaaaaaaaaaaa\naaaaaaaaaaaaaaa\naaaaaaaaaaaa',
+				isChange:false,
+				temp_data:{
+					name:'',
+					time:'',
+					detail:"", 
+					
+				}
 			}
 		},
 		computed: mapState(['token']),
@@ -42,7 +73,86 @@
 				uni.setNavigationBarTitle({
 				title: title
 				});
+			},
+			change(){
+				
+				this.isChange = true;
+				this.temp_data.name = this.name;
+				this.temp_data.time= this.time;
+				this.temp_data.detail = this.detail;
+				
+				console.log(this.toChangeInfo);
+			},
+			cancel(){
+				this.isChange = false;
+				this.name = this.temp_data.name;
+				this.time= this.temp_data.time;
+				this.detail = this.temp_data.detail;
+				
+				
+				console.log(this.change);
+			},
+			submit(){
+				if (this.name.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '标题不能为空'
+					});
+					return;
+				}
+				
+				if (this.time.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '时间不能为空'
+					});
+					return;
+				}
+				if (this.detail.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '描述不能为空'
+					});
+					return;
+				}
+				
+				
+				const newData = {
+					name:this.name,
+					time:this.time,
+					detail:this.detail,
+					
+					
+				};
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/tinfo',
+					data:newData,
+					method:'POST',
+					
+					success:(res)=>{
+						const resData = res.data;
+						if(resData.ststus == 'success'){
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
+				const isSuccess = true;
+				if(isSuccess){
+					this.changeInfo();
+					uni.showToast({
+						icon:'none',
+						title:'修改成功'
+					});
+				}
+				
 			}
+					
 		},
 		onReady() {
 			switch(this.kind){
@@ -135,4 +245,28 @@
 		font-size: 10px;
 		color: #666666;
 	}
+	.text-area{
+		margin-top: 16px;
+		margin-bottom: auto;
+		border-bottom: 1px solid #000000;
+	}
+	.button.primary {
+		width: 280rpx;
+		margin: auto;
+		background-color: #FFFFFF;
+		outline-style: none ;
+		border: 1px solid #d60016; 
+		border-radius: 8px;
+		text-decoration-color: #000;
+		color: #d60016;
+	}
+	.btn-row {
+		display: flex;
+		flex: 1;
+		flex-direction:row;
+		margin-top: 32rpx;
+		margin-left: 50rpx;
+		margin-right: 50rpx;
+	}
+	
 </style>
