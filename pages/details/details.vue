@@ -280,5 +280,8 @@
 		margin-left: 50rpx;
 		margin-right: 50rpx;
 	}
+	.text-box{
+		margin-top: 12px;
+	}
 	
 </style>

@@ -1,12 +1,13 @@
 <template>
 	<view class="content">
-		<scroll-view >
+		<scroll-view>
 			<view v-for="(item,index) in dataList":key='index' @tap=navigateTo(item)>
 				<view class="scell" >
 					<view class="text-row" >
 						<view class="text-title">
-							{{item.name}}
+							{{item.n}}
 						</view>
+						
 						<view class="text-time">
 							{{item.time}}
 						</view>
@@ -14,7 +15,7 @@
 					
 					<image class="image-arrow" mode="widthFix" src="../../../static/img/arrow.png"></image>
 				</view>
-				<view v-if="index != (dataList.length-1)" class="view-line"></view>
+				<view  class="view-line"></view>
 			</view>
 			
 		</scroll-view>
@@ -22,48 +23,43 @@
 </template>
 
 <script>
+	
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+	
 	export default {
 		data() {
 			return {
-				dataList: [
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "1", name: '1关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "2", name: '2关于XXXXXXXXXX',time:'2017-03-11'},
-					{id: "3", name: '3关于XXXXXXXXXX',time:'2017-03-11'},
-					]
+				triggered: false,
+				dataList: []
 			}
 		},
+		computed: mapState(['token']),
 		methods: {
 			navigateTo(item){
 				var url = '../../details/details?';
-				url = url + "kind=3&id="+item.id+'&name='+item.name+'&time='+item.time;
+				url = url + "kind=3&i="+item.i+'&n='+item.n+'&time='+item.time+'&d='+item.d,+'&personId='+item.personId;
 				uni.navigateTo({
 					url: url
 				});
 			},
+			
 			getData(){
 				uni.request({
 					method:'POST',
-					url:'http://112.124.22.241:8080/',
+					url:'http://112.124.22.241:8080/achi',
 					data:{
 						token:this.token,
-						opration:1,
+						t:4,
 					},
 					success: (res) => {
 						const resData = res.data;
 						if(resData.status == 'success'){
-							console.log(resData.result);
+							const result = resData.result;
+							this.dataList = result.list;
+							
 						}else{
 							console.log(resData.reason);
 						}
@@ -74,10 +70,57 @@
 				});
 			},
 			
-		}
+		},
+		 onShow() {
+		    this._freshing = false;
+			this.getData();
+		    
+		},
+		
 	}
 </script>
 
 <style>
-
+	.content{
+		width: 100%;
+	}
+	.image-arrow{
+		width: 28px;
+		margin-right: 8rpx;
+		height: 32px;
+		margin-top: auto;
+		margin-bottom: auto;
+		
+		/* align-self: center; */
+		
+	}
+	.text-row{
+		
+		width: 88%;
+		margin-right: 12rpx;
+		margin-top: auto;
+		margin-bottom: auto;
+		
+		/* align-self: center; */
+		
+		
+	}
+	.scell{
+		display: flex;
+		margin-top: 12rpx;
+		width: 92%;
+		height: 72px;
+		margin-left: auto;
+		margin-right: auto;
+		/* background-color: #4CD964; */
+		
+		/* padding: 6rpx,8rpx,6rpx,8rpx; */
+	}
+	.text-title{
+		font-size: 16px;
+	}
+	.text-time{
+		font-size: 10px;
+		color: #666666;
+	}
 </style>

@@ -7,9 +7,7 @@
 						<view class="text-title">
 							{{item.n}}
 						</view>
-						<view class="text-time">
-							{{item.time}}
-						</view>
+						
 						<view class="text-time">
 							{{item.time}}
 						</view>
