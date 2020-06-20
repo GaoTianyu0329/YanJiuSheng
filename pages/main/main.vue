@@ -213,9 +213,9 @@
 
 	}
 	.nav_item{
-		width: 20%
+		width: 20%;
 	}
 	.nav_name{
-		background-color: #DDDDDD
+		background-color: #DDDDDD;
 	}
 </style>

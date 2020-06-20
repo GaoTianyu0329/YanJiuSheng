@@ -1,6 +1,6 @@
 <template>
-	<view>
-		学生培养计划
+	<view class="content">
+		
 	</view>
 </template>
 
