@@ -3,40 +3,41 @@
 <!-- 		<view v-if="completeInfo == true"> -->
 			<view class="nav_name">已申请招生专业</view>
 			<view class="nav">
-				<view class="nav_item" v-for="(item,index) in list1" :key="index">
-					<view class="scell">
-						<view class="title">
-							id:
+				<view class="nav_items" v-for="(item,index) in list1" :key="index">
+					<view class="left_item">
+						<view class="scell">
+							<view class="title">
+								id:
+							</view>
+							<view class="titles">
+								{{item.id}}
+							</view>
 						</view>
-						<view class="titles">
-							{{item.id}}
+						<view class="scell">
+							<view class="title">
+								code:
+							</view>
+							<view class="titles">
+								{{item.code}}
+							</view>
 						</view>
-					</view>
-					<view class="scell">
-						<view class="title">
-							code:
+						<view class="scell">
+							<view class="title">
+								name:
+							</view>
+							<view class="titles">
+								{{item.name}}
+							</view>
 						</view>
-						<view class="titles">
-							{{item.code}}
+						<view class="scell">
+							<view class="title">
+								type:
+							</view>
+							<view class="titles">
+								{{item.type}}
+							</view>
 						</view>
-					</view>
-					<view class="scell">
-						<view class="title">
-							name:
-						</view>
-						<view class="titles">
-							{{item.name}}
-						</view>
-					</view>
-					<view class="scell">
-						<view class="title">
-							type:
-						</view>
-						<view class="titles">
-							{{item.type}}
-						</view>
-					</view>
-					<view class="scell">
+						<view class="scell">
 						<view class="title">
 							academy:
 						</view>
@@ -44,7 +45,14 @@
 							{{item.academy}}
 						</view>
 					</view>
+					</view>
+					<view class="btn">
+						<button type="primary" class="primary" @click="submits(item.id)" >
+							取消
+						</button>
+					</view>
 				</view>
+
 			</view>
 			<view class="nav_name">未申请招生专业</view>
 			<view class="nav">
@@ -143,14 +151,52 @@
 					}
 				});
 			},
+			
+			submits(id) {
+				console.log(id);
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/recurit',
+					data:{
+						token:this.token,
+						tId:id,
+						t:1,
+					},
+					method:'POST',
+					
+					success:(res)=>{
+						const resData = res.data;
+						if(resData.ststus == 'success'){
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
+			},
+			
 			submit(id) {
 				console.log(id);
 				uni.request({
 					method:'POST',
 					url:'http://112.124.22.241:8080/recurit',
-					data:id,
+					data:{
+						token:this.token,
+						tId:id,
+						t:0,
+					},
+					method:'POST',
 					
 					success:(res)=>{
+						const resData = res.data;
+						if(resData.ststus == 'success'){
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
