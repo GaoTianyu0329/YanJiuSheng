@@ -1,22 +1,329 @@
 <template>
-	<view>
-		招生团队申请
+	<view class="content">
+		<view class="nav_name">招生团队信息</view>
+		<view class="nav_item">
+			<view class="scell">
+					<view class="title">
+						团队名称:
+					</view>
+					<view class="titles">
+						{{tn}}
+					</view>
+
+			</view>
+			<view class="scell">
+					<view class="title">
+						责任导师:
+					</view>
+					<view class="titles">
+						{{ta}}
+					</view>
+			</view>
+			<view class="scell">
+					<view class="title">
+						培养单位:
+					</view>
+					<view class="titles">
+						{{u}}
+					</view>
+			</view>
+			<view class="scell">
+					<view class="title">
+						团队介绍:
+					</view>
+					<view class="titles">
+						{{ti}}
+					</view>
+
+			</view>
+		</view>
+		<view class="nav_name">团队成员</view>
+		<view class="nav">
+			<view class="nav_items" v-for="(item,index) in datalist" :key="index">
+				<view class="left_item">
+					<view class="scells">
+						<view class="title">
+							教师号:
+						</view>
+						<view class="titles">
+							{{item.id}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							姓名:
+						</view>
+						<view class="titles">
+							{{item.name}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							荣誉:
+						</view>
+						<view class="titles">
+							{{item.award}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							性别:
+						</view>
+						<view class="titles">
+							{{item.gender}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							年龄:
+						</view>
+						<view class="titles">
+							{{item.age}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							职称:
+						</view>
+						<view class="titles">
+							{{item.rank}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							方向:
+						</view>
+						<view class="titles">
+							{{item.dirction}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							教育背景:
+						</view>
+						<view class="titles">
+							{{item.eduback}}
+						</view>
+					</view>
+					<view class="scells">
+						<view class="title">
+							学院:
+						</view>
+						<view class="titles">
+							{{item.unit}}
+						</view>
+					</view>
+				</view>
+				<view class="btn">
+					<button type="primary" class="primary" @click="sub(item.id)" >
+						移除
+					</button>
+				</view>
+			</view>
+		
+		</view>
+		<view class="nav_name">添加成员</view>
+		<view class="search">
+			<view class="search">
+				<view class="word">请输入教师号：</view>
+				<input class="tid" type="text" v-model="id">
+				<button class="sub" @click="search(id)">提交</button> 
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+	
 	export default {
 		data() {
 			return {
-				
+				ta:"",
+				ti:"",
+				tn:"",
+				u:"",
+				datalist:[],
 			}
 		},
+		computed: mapState(['token']),
 		methods: {
-			
-		}
+			getData(){
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/recuritteam',
+					data:{
+						token:this.token
+					},
+					success: (res) => {
+						const resData = res.data;
+						if(resData.status == 'success'){
+							const re = resData.result.tai;
+							const ree = resData.result.tml;
+							this.datalist = ree;
+							console.log(ree);
+							this.ta = re.ta;
+							this.ti = re.ti;
+							this.tn = re.tn;
+							this.u = re.u;
+							console.log(re);
+							
+						}else{
+							console.log(resData.reason);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				});
+			},
+			sub(id) {
+				console.log(id);
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/recuritteam',
+					data:{
+						token:this.token,
+						personId:id,
+						type:0,
+					},
+					
+					success:(res)=>{
+						const resData = res.data;
+						if(resData.ststus == 'success'){
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
+			},
+			search(id) {
+				console.log(id);
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/recuritteam',
+					data:{
+						token:this.token,
+						personId:id,
+						type:1,
+					},
+					method:'POST',
+					
+					success:(res)=>{
+						const resData = res.data;
+						if(resData.ststus == 'success'){
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
+			},
+			onShow() {
+				this.getData();
+		    
+			},
+		},
 	}
 </script>
 
 <style>
+	.sub{
+		height: 50rpx;
+		margin-top: 40rpx;
+		font-size: 25rpx;
+		margin-left: 20rpx;
+	}
+	.word {
+		height: 50rpx;
+		margin-top: 40rpx;
+		font-size: 30rpx;
+	}
+	.tid {
+		height: 50rpx;
+		margin-top: 40rpx;
+		border: 1px solid #DDDDDD;
+		border-radius: 4px;
+
+	}
+	.search {
+		display: flex;
+
+	}
+	.nav_name{
+		background-color: #DDDDDD;
+		text-align:center;
+		height:60rpx;
+		font-size: 35rpx;
+		margin-top: 20rpx;
+	}
+	
+	.title{
+		width: 150rpx;
+		height:80rpx;
+	}
+	.titles{
+		width: 300rpx;
+		height:80rpx;
+	}
+	
+	.nav_item{
+		border:1px solid grey;
+		border-radius: 4px;
+		height:300rpx;
+		font-size: 25rpx;
+		margin-top: 20rpx;
+	}
+	.scell{
+		display: flex;
+		margin-top: 8px;
+		width: 94%;
+		height: 30px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.left_item{
+		height:200rpx;
+		font-size: 25rpx;
+	
+	}
+	.btn {
+		display: flex;
+		flex: 1;
+		flex-direction:row;
+		height: 350rpx;
+		margin-left: 100rpx;
+	}
+	.primary{
+		line-height:150rpx;
+
+	}
+	.nav_items{
+		display: flex;
+		border:1px solid grey;
+		border-radius: 4px;
+		height:350rpx;
+		font-size: 25rpx;
+		margin-top: 20rpx;
+		width: 500rpx;
+	}
+	.scells{
+		display: flex;
+		margin-top: 8px;
+		width: 94%;
+		height: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
 </style>

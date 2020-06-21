@@ -159,6 +159,18 @@
             "path" : "pages/recruitInfo/recruitInfo",
             "style" : {}
         }
+        ,{
+            "path" : "pages/teamInfo/teamInfo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/teamInfo/teamInfo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/teamInfo/teamInfo",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",
