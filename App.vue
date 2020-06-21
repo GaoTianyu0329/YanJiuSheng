@@ -36,31 +36,20 @@
 				this.init(data)
 				console.log("init"+token);
 			},
+			storageData(key,data){
+				uni.setStorageSync(key,data)
+			},
+			
 		},
 		onLaunch: function() {
 			console.log('App Launch');
 			const hasLogin = this.getStorageData("hasLogin") || false;
 			const openId = this.getStorageData("openId") || "";
-			if(openId){
-				
-				uni.request({
-					url: 'http://112.124.22.241:8080/login',
-					data: {
-						openid:openId,
-					},
-					method:'POST',
-					success: (loginRes) => {
-						const resData = loginRes.data;
-						console.log(resData);
-					},
-					fail: (loginRes) => {
-						console.log(loginRes)
-					}
-				});
-			}else{
+			if(!hasLogin){
 				uni.login({
 					provider:'weixin',
 					success: (res) => {
+						// console.log(res.code)
 						const code = res.code;
 						uni.request({
 							url: 'http://112.124.22.241:8080/login',
@@ -71,8 +60,11 @@
 							success: (loginRes) => {
 								const resData = loginRes.data;
 								console.log(resData);
+								this.storageData("hasLogin",true);
+								this.storageData('token',resData.result.token);
 							},
 							fail: (loginRes) => {
+								console.log('2')
 								console.log(loginRes)
 							}
 						})
@@ -82,6 +74,7 @@
 					}
 				})
 			}
+			
 			this.initState()
 		},
 		onShow: function() {
