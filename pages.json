@@ -45,12 +45,14 @@
         }
         ,{
             "path" : "pages/function/2studentInfo/2studentInfo",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "学生信息查看"
+			}
         }
         ,{
             "path" : "pages/function/3studentPlan/3studentPlan",
             "style" : {
-				"navigationBarTitleText": "论文维护"
+				"navigationBarTitleText": "学生培养计划"
 				}
         }
         ,{
@@ -85,7 +87,9 @@
         }
         ,{
             "path" : "pages/function/9recruit/9recruit",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "招生资格申请"
+			}
         }
         ,{
             "path" : "pages/function/10recruitTeam/10recruitTeam",
@@ -151,6 +155,10 @@
 		    	"disableScroll":true
 		    }
 		}
+        ,{
+            "path" : "pages/recruitInfo/recruitInfo",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",
