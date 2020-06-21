@@ -16,7 +16,13 @@
 				<view :id="'top'+listIndex" style="width: 100%;height: 110upx;"></view>
 				
 					<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index">
-						{{item}}
+						<text > {{item.n}}</text>
+						<text> {{item.a}}</text>
+						<text> {{item.l}}</text>
+						<text v-if="item.status == '0'">未审核</text>
+						<text v-if="item.status == '1'">已申请未处理</text>
+						<text v-if="item.status == '2'"></text>
+						<text v-if="item.status == '3'"></text>
 					</view>
 				
 				<view class='noCard' v-if="listItem.length===0">
@@ -114,7 +120,36 @@
 						})
 						this.$refs.refresh.endAfter() //刷新结束调用
 					}, 1000)
+			},
+			getData(){
+				const token = uni.getStorageSync('token')
+				uni.request({
+					url: 'http://112.124.22.241:8080/gradeval',
+					data: {
+						token:token,
+						t:'0'
+					},
+					method:'POST',
+					success: (res) => {
+						const resData = res.data
+						if(resData.status == 'success'){
+							const result = resData.result
+							this.list[0] = result.cl
+							this.list[1] = result.ucl
+							this.$forceUpdate() //二维数组，开启强制渲染
+							
+						}else{
+							console.log(resData.reason)
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg)
+					}
+				})
 			}
+		},
+		onShow() {
+			this.getData()
 		}
 	}
 </script>
@@ -154,7 +189,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: #999999;
+		color: #000000;
 		box-shadow: 0 0 10upx 0 rgba(0, 0, 0, 0.10);
 		border-radius: 10upx;
 	}

@@ -165,8 +165,10 @@
 				],
 			}
 		},
-		onLoad() {
+		onReady() {
+			
 			if (!this.hasLogin) {
+				console.log(this.hasLogin)
 				uni.navigateTo({
 					url: '../login/login'
 				});

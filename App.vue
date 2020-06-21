@@ -59,13 +59,16 @@
 							method:'POST',
 							success: (loginRes) => {
 								const resData = loginRes.data;
-								console.log(resData);
+								
 								this.storageData("hasLogin",true);
 								this.storageData('token',resData.result.token);
+								this.initState()
+							
 							},
 							fail: (loginRes) => {
 								console.log('2')
 								console.log(loginRes)
+								uni.clearStorageSync()
 							}
 						})
 					},
@@ -73,9 +76,46 @@
 						console.log(res.errMsg);
 					}
 				})
+			}else{
+				const teacherId = this.getStorageData('teacherId')
+				const password = this.getStorageData('pwd')
+				uni.request({
+					url: 'http://112.124.22.241:8080/login',
+					data: {
+						u:teacherId,
+						p:password
+					},
+					method:'POST',
+					success:(res) => {
+						
+						const resData = res.data;
+						if(resData.status == 'success'){
+							
+							this.storageData("hasLogin",true);
+							this.storageData('token',resData.result.token);
+							
+							this.initState()
+							
+											
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: resData.reason,
+							});
+						}
+					},
+					fail:(res) =>{
+						console.log(res);
+						uni.showToast({
+							icon: 'none',
+							title: res.errMsg,
+						});
+					}
+				});
+				
 			}
 			
-			this.initState()
+			
 		},
 		onShow: function() {
 			console.log('App Show');
