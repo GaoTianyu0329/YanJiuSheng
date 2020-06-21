@@ -155,7 +155,7 @@
 	
 	
 	export default {
-		computed: mapState(['toChangeInfo','token']),
+		computed: mapState(['toChangeInfo']),
 		
 		data() {
 			return {
