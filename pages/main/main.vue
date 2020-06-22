@@ -64,7 +64,7 @@
 		mapState
 	} from 'vuex'
 	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName','studentId']),
+		computed: mapState(['forcedLogin', 'userName','studentId']),
 		data() {
 			return {
 				navs1: [
@@ -163,10 +163,11 @@
 						path: '/pages/function/17returnChaVerify/17returnChaVerify'
 					},
 				],
+				hasLogin:false
 			}
 		},
 		onReady() {
-			
+			this.hasLogin = uni.getStorageSync('hasLogin')
 			if (!this.hasLogin) {
 				console.log(this.hasLogin)
 				uni.navigateTo({

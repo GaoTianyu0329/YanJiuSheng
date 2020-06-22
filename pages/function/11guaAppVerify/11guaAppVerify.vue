@@ -16,13 +16,16 @@
 				<view :id="'top'+listIndex" style="width: 100%;height: 110upx;"></view>
 				
 					<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index">
-						<text > {{item.n}}</text>
-						<text> {{item.a}}</text>
-						<text> {{item.l}}</text>
-						<text v-if="item.status == '0'">未审核</text>
-						<text v-if="item.status == '1'">已申请未处理</text>
-						<text v-if="item.status == '2'"></text>
-						<text v-if="item.status == '3'"></text>
+					<view class="content">
+						<text class="title"> 姓名：{{item.n}}</text>
+						<text class="title"> 班级：{{item.a}}</text>
+						<text class="title"> 年龄：{{item.l}}</text>
+						<text class="title" v-if="item.status == '0'">未审核</text>
+						<text class="title" v-if="item.status == '1'">已申请未处理</text>
+						<text class="title" v-if="item.status == '2'">未通过审核</text>
+						<text class="title" v-if="item.status == '3'">已通过审核 </text>
+					</view>
+						<view style="color: #000000;margin-top: auto;margin-bottom: auto;margin-right: 12px;font-size: 14px;">详情></view>
 					</view>
 				
 				<view class='noCard' v-if="listItem.length===0">
@@ -165,19 +168,24 @@
 	  background-color: #f6f6f6;
 	}
 	.content {
-		width: 100%;
-		
+		background-color: #FFFFFF;
+		width: 60%;
+		flex: 1;
+		flex-direction: column;
+		color: #000000;
 	}
 	
 	.card {
 		width: 90%;
-		height: 368upx;
+		height: 104px;
 		background-color: white;
-		margin: 0 auto 42upx auto;
+		margin: 4px auto 4px auto;
 		background: #FFFFFF;
 		box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.10);
 		border-radius: 5px;
-		position: relative;
+		// position: relative;
+		display: flex;
+		
 		
 	}
 	
@@ -237,5 +245,10 @@
 	.input999 {
 		color: #999;
 		width: 80%;
+	}
+	text.title{
+		margin-top: 2px;
+		width: 80%;
+		margin-left: 12px;
 	}
 </style>
