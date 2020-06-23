@@ -93,7 +93,9 @@
         }
         ,{
             "path" : "pages/function/10recruitTeam/10recruitTeam",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "招生团队申请"
+			}
         },
 		{
 		    "path" : "pages/function/11guaAppVerify/11guaAppVerify",
@@ -112,19 +114,27 @@
         }
         ,{
             "path" : "pages/function/14sponGovVerify/14sponGovVerify",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "公派申请审核"
+			}
         }
         ,{
             "path" : "pages/function/15interConVerify/15interConVerify",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "国际会议审核"
+			}
         }
         ,{
             "path" : "pages/function/16abroadAppVerify/16abroadAppVerify",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "出国申请审核"
+			}
         }
         ,{
             "path" : "pages/function/17returnChaVerify/17returnChaVerify",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "归国变更审核"
+			}
         }
         ,{
             "path" : "pages/details/details",
