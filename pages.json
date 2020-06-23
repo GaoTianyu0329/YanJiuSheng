@@ -100,17 +100,24 @@
 		{
 		    "path" : "pages/function/11guaAppVerify/11guaAppVerify",
 		    "style" : {
-				"disableScroll":true
+				"disableScroll":true,
+				"navigationBarTitleText": "毕业申请审核"
 			}
 		}
         
         ,{
             "path" : "pages/function/12exReviewDissVerify/12exReviewDissVerify",
-            "style" : {"disableScroll":true}
+            "style" : {
+				"disableScroll":true,
+				"navigationBarTitleText": "外审论文审核"
+			}
         }
         ,{
             "path" : "pages/function/13guaDissVerify/13guaDissVerify",
-            "style" : {"disableScroll":true}
+            "style" : {
+				"disableScroll":true,
+				"navigationBarTitleText": "毕业论文审核"
+			}
         }
         ,{
             "path" : "pages/function/14sponGovVerify/14sponGovVerify",

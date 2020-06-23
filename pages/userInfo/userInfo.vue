@@ -267,22 +267,31 @@
 						const resData = res.data;
 						if(resData.ststus == 'success'){
 							console.log(resData);
+							uni.showToast({
+								icon:'none',
+								title:'修改成功'
+							});
+							this.changeInfo();
 						}else{
 							console.log(resData);
+							uni.showToast({
+								icon:'none',
+								title:'修改失败'
+							});
+							this.cancel()
+							
 						}
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon:'none',
+							title:'修改失败'
+						});
+						this.cancel()
 					}
 				})
-				const isSuccess = true;
-				if(isSuccess){
-					this.changeInfo();
-					uni.showToast({
-						icon:'none',
-						title:'修改成功'
-					});
-				}
+				
 				
 			},
 			getStorageData(key){

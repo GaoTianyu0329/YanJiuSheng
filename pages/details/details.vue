@@ -12,19 +12,22 @@
 					{{d}}
 				</text>
 			</view>
-			<!-- <view class="btn-row">
+			<view class="btn-row">
 				<button type="default" class="primary" @tap='change()'>
 					修改数据
 				</button>
 				
-			</view> -->
+			</view>
 		</view>
 		<view v-if="isChange">
 			<view class="text-title">
-				<input  class="text-area" placeholder="性别" v-model="n"/>
+				<input  class="text-area" placeholder="标题" v-model="n"/>
 			</view>
 			<view class="text-time">
-				<input  class="text-area" placeholder="性别" v-model="time"/>
+				<view class="text-area">
+					{{time}}
+				</view>
+				<!-- <input  class="text-area" placeholder="性别" v-model="time"/> -->
 			</view>
 			<view class="text-box" scroll-y="true">
 			    <textarea class="text-area" v-model="d">
@@ -65,10 +68,11 @@
 					d:'',
 					
 					
-				}
+				},
+				token:''
 			}
 		},
-		computed: mapState(['token']),
+		computed: mapState([]),
 		methods: {
 			setTitle(title){
 				
@@ -79,23 +83,23 @@
 			change(){
 				
 				this.isChange = true;
-				this.temp_data.name = this.name;
+				this.temp_data.name = this.n;
 				this.temp_data.time= this.time;
-				this.temp_data.detail = this.detail;
+				this.temp_data.detail = this.d;
 				
 				console.log(this.toChangeInfo);
 			},
 			cancel(){
 				this.isChange = false;
-				this.name = this.temp_data.name;
+				this.n = this.temp_data.name;
 				this.time= this.temp_data.time;
-				this.detail = this.temp_data.detail;
+				this.d = this.temp_data.detail;
 				
 				
 				console.log(this.change);
 			},
 			submit(){
-				if (this.name.length < 1) {
+				if (this.n.length < 1) {
 					uni.showToast({
 						icon: 'none',
 						title: '标题不能为空'
@@ -110,7 +114,7 @@
 					});
 					return;
 				}
-				if (this.detail.length < 1) {
+				if (this.d.length < 1) {
 					uni.showToast({
 						icon: 'none',
 						title: '描述不能为空'
@@ -120,38 +124,48 @@
 				
 				
 				const newData = {
-					name:this.name,
-					time:this.time,
-					detail:this.detail,
+					token:this.token,
+					i:this.i,
+					n:this.n,
+					
+					d:this.d,
 					
 					
 				};
 				uni.request({
 					method:'POST',
-					url:'http://112.124.22.241:8080/tinfo',
+					url:'http://112.124.22.241:8080/achi',
 					data:newData,
 					method:'POST',
 					
 					success:(res)=>{
 						const resData = res.data;
-						if(resData.ststus == 'success'){
+						if(resData.status == 'success'){
 							console.log(resData);
+							uni.showToast({
+								icon:'none',
+								title:'修改成功'
+							});
+							this.isChange = false;
 						}else{
 							console.log(resData);
+							uni.showToast({
+								icon:'none',
+								title:'修改失败'
+							});
+							this.cancel()
 						}
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon:'none',
+							title:'修改失败'
+						});
+						this.cancel()
 					}
 				})
-				const isSuccess = true;
-				if(isSuccess){
-					this.changeInfo();
-					uni.showToast({
-						icon:'none',
-						title:'修改成功'
-					});
-				}
+				
 				
 			},
 			getPersonName(){
@@ -161,6 +175,33 @@
 					data:{
 						pid:this.personId,
 					},
+				})
+			},
+			getDetailData(tokrn,kind,id){
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/achi',
+					data:{
+						token:token,
+						t:kind,
+						i:id
+					},
+					success: (res) => {
+						const resData = res.data;
+						if(resData.status == 'success'){
+							const data = resData.result.list
+							this.n = data.n
+							this.t = data.t
+							this.d = data.d
+							
+							console.log(resData);
+						}else{
+							console.log(resData);
+						}
+					},
+					fail: (res) => {
+						
+					}
 				})
 			}
 					
@@ -209,6 +250,7 @@
 				this.n = option.n;
 				this.time = option.time;
 				this.d = option.d;
+				this.token = uni.getStorageSync('token')
 		    }
 		
 	}
