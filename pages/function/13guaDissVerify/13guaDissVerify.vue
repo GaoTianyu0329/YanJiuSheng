@@ -15,7 +15,7 @@
 				<scroll-view style="height: 100%;" scroll-y="true" scroll-with-animation :scroll-into-view="toView">
 				<view :id="'top'+listIndex" style="width: 100%;height: 110upx;"></view>
 				
-					<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index">
+					<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index" @tap=navigateTo(item)>
 					<view class="content">
 						<text class="title"> 论文题目：{{item.pt}}</text>
 						<text class="title"> id：{{item.i}}</text>
@@ -59,6 +59,14 @@
 		
 		},
 		methods: {
+			navigateTo(item){
+				var url = '../../PageAudit/PageAudit?';
+				url = url + "type=2"+"&i="+item.i+"&time="+item.t+"&pt="+item.pt+"&pc="+item.pc+"&a="+item.a+"&status="+item.status;
+				console.log(url)
+				uni.navigateTo({
+					url: url
+				});
+			},
 			// tab事件
 			toTop(){
 				this.toView = ''

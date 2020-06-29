@@ -181,6 +181,16 @@
             "style" : {}
         }
         
+        ,{
+            "path" : "pages/GraduationAudit/GraduationAudit",
+            "style" : {"navigationBarTitleText": "毕业审核"}
+        }
+        ,{
+            "path" : "pages/PageAudit/PageAudit",
+            "style" : {
+				"navigationBarTitleText": "论文审核"
+			}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",
