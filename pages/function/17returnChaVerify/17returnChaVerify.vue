@@ -148,6 +148,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../17returnChaVerify/17returnChaVerify'
 				})
 			},
 			submits(id) {
@@ -174,6 +177,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../17returnChaVerify/17returnChaVerify'
 				})
 			},
 			getData(){

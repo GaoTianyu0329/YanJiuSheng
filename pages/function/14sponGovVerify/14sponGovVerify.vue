@@ -122,6 +122,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../14sponGovVerify/14sponGovVerify'
 				})
 			},
 			submit(id) {
@@ -148,6 +151,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../14sponGovVerify/14sponGovVerify'
 				})
 			},
 			submits(id) {
@@ -174,6 +180,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../14sponGovVerify/14sponGovVerify'
 				})
 			},
 			getData(){
@@ -219,7 +228,7 @@
 		width: 480px; //处于demo考虑 ,scroll-view宽度设为固定值，实际项目中请自行计算
 	}
 	.scroll-view-item {
-	  width: 590px; // 300(scroller的宽度) + 100(delete按钮的宽度)
+	  width: 580px; // 300(scroller的宽度) + 100(delete按钮的宽度)
 	  height: 100px;
 	  position: relative;
 	}

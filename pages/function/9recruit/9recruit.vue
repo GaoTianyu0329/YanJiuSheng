@@ -179,6 +179,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../9recruit/9recruit'
 				})
 			},
 			
@@ -205,6 +208,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../9recruit/9recruit'
 				})
 			},
 		},

@@ -122,6 +122,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../16abroadAppVerify/16abroadAppVerify'
 				})
 			},
 			submit(id) {
@@ -148,6 +151,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../16abroadAppVerify/16abroadAppVerify'
 				})
 			},
 			submits(id) {
@@ -174,6 +180,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../16abroadAppVerify/16abroadAppVerify'
 				})
 			},
 			getData(){

@@ -205,6 +205,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../10recruitTeam/10recruitTeam'
 				})
 			},
 			search(id) {
@@ -230,6 +233,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../10recruitTeam/10recruitTeam'
 				})
 			},
 			onShow() {

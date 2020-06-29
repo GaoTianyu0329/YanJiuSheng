@@ -102,6 +102,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../3studentPlan/3studentPlan'
 				})
 			},
 			submit(id) {
@@ -127,6 +130,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../3studentPlan/3studentPlan'
 				})
 			},
 			submits(id) {
@@ -152,6 +158,9 @@
 					fail: (res) => {
 						console.log(res.errMsg);
 					}
+				});
+				uni.redirectTo({
+					url:'../3studentPlan/3studentPlan'
 				})
 			},
 			getData(){
