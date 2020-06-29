@@ -225,10 +225,10 @@
 	.scroll-view-scroller {
 		border:1px solid grey;
 		border-radius: 4px;
-		width: 480px; //处于demo考虑 ,scroll-view宽度设为固定值，实际项目中请自行计算
+		width: 500px; //处于demo考虑 ,scroll-view宽度设为固定值，实际项目中请自行计算
 	}
 	.scroll-view-item {
-	  width: 580px; // 300(scroller的宽度) + 100(delete按钮的宽度)
+	  width: 640px; // 300(scroller的宽度) + 100(delete按钮的宽度)
 	  height: 100px;
 	  position: relative;
 	}
@@ -243,7 +243,7 @@
 	  line-height: 100px;
 	}
 	.primary{
-		font-size: 20rpx;
+		font-size: 40rpx;
 		margin-right: 20rpx;
 	}
 	

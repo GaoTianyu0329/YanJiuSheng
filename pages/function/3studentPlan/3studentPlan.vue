@@ -3,61 +3,65 @@
 		<view class="nav_name">已审核</view>
 		<view class="nav">
 			<view class="nav_items" v-for="(item,index) in list1" :key="index">
-				<view class="left_item">
-					<view class="scell">
-						<view class="title">
-							学号:
+				<scroll-view class="scroll-view-scroller" scroll-x>	
+					<view class="scroll-view-item">
+						<view class="scell">
+							<view class="title">
+								学号:
+							</view>
+							<view class="titles">
+								{{item.i}}
+							</view>
 						</view>
-						<view class="titles">
-							{{item.i}}
+						<view class="scell">
+							<view class="title">
+								姓名:
+							</view>
+							<view class="titles">
+								{{item.name}}
+							</view>
 						</view>
 					</view>
-					<view class="scell">
-						<view class="title">
-							姓名:
-						</view>
-						<view class="titles">
-							{{item.name}}
-						</view>
+					<view class="scroll-view-delete">
+						<button type="primary" class="primary" @click="sub(item.i)" >
+							取消
+						</button>
 					</view>
-				</view>
-				<view class="btn">
-					<button type="primary" class="primary" @click="sub(item.i)" >
-						取消
-					</button>
-				</view>
+				</scroll-view>
 			</view>
 		
 		</view>
 		<view class="nav_name">未审核</view>
 		<view class="nav">
 			<view class="nav_items" v-for="(item,index) in list2" :key="index">
-				<view class="left_item">
-					<view class="scell">
-						<view class="title">
-							学号:
+				<scroll-view class="scroll-view-scroller" scroll-x>
+					<view class="scroll-view-item">
+						<view class="scell">
+							<view class="title">
+								学号:
+							</view>
+							<view class="titles">
+								{{item.i}}
+							</view>
 						</view>
-						<view class="titles">
-							{{item.i}}
+						<view class="scell">
+							<view class="title">
+								姓名:
+							</view>
+							<view class="titles">
+								{{item.name}}
+							</view>
 						</view>
 					</view>
-					<view class="scell">
-						<view class="title">
-							姓名:
-						</view>
-						<view class="titles">
-							{{item.name}}
-						</view>
+					<view class="scroll-view-delete">
+						<button type="primary" class="primary" @click="submits(item.i)" >
+							通过
+						</button>
+						<button type="primary" class="primary" @click="submit(item.i)" >
+							不通过				
+						</button>
 					</view>
-				</view>
-				<view class="btns">
-					<button type="primary" class="primary" @click="submits(item.i)" >
-						通过
-					</button>
-					<button type="primary" class="primary" @click="submit(item.i)" >
-						不通过				
-					</button>
-				</view>
+				</scroll-view>
 			</view>
 		
 		</view>
@@ -197,8 +201,28 @@
 </script>
 
 <style>
+	.scroll-view-scroller {
+		border:1px solid grey;
+		border-radius: 4px;
+		width: 500px; //处于demo考虑 ,scroll-view宽度设为固定值，实际项目中请自行计算
+	}
+	.scroll-view-item {
+	  width: 640px; // 300(scroller的宽度) + 100(delete按钮的宽度)
+	  height: 100px;
+	  position: relative;
+	}
+	.scroll-view-delete {
+		display: flex;
+	  width: 100px; //按钮的宽度
+	  position: absolute;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	  text-align: center;
+	  line-height: 100px;
+	}
 	.primary{
-		font-size: 20rpx;
+		font-size: 40rpx;
 		margin-right: 20rpx;
 	}
 	
