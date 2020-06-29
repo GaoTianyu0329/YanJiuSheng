@@ -145,8 +145,8 @@
 						const resData = res.data
 						if(resData.status == 'success'){
 							const result = resData.result
-							this.list[0] = result.cl
-							this.list[1] = result.ucl
+							this.list[1] = result.cl
+							this.list[0] = result.ucl
 							this.$forceUpdate() //二维数组，开启强制渲染
 							
 						}else{
