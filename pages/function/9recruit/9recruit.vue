@@ -4,106 +4,110 @@
 			<view class="nav_name">已申请招生专业</view>
 			<view class="nav">
 				<view class="nav_items" v-for="(item,index) in list1" :key="index">
-					<view class="left_item">
-						<view class="scell">
-							<view class="title">
-								id:
+					<scroll-view class="scroll-view-scroller" scroll-x>	
+						<view class="scroll-view-item">
+							<view class="scell">
+								<view class="title">
+									id:
+								</view>
+								<view class="titles">
+									{{item.id}}
+								</view>
 							</view>
-							<view class="titles">
-								{{item.id}}
+							<view class="scell">
+								<view class="title">
+									code:
+								</view>
+								<view class="titles">
+									{{item.code}}
+								</view>
 							</view>
+							<view class="scell">
+								<view class="title">
+									name:
+								</view>
+								<view class="titles">
+									{{item.name}}
+								</view>
+							</view>
+							<view class="scell">
+								<view class="title">
+									type:
+								</view>
+								<view class="titles">
+									{{item.type}}
+								</view>
+							</view>
+							<view class="scell">
+								<view class="title">
+									academy:
+								</view>
+								<view class="titles">
+									{{item.academy}}
+								</view>
 						</view>
-						<view class="scell">
-							<view class="title">
-								code:
-							</view>
-							<view class="titles">
-								{{item.code}}
-							</view>
 						</view>
-						<view class="scell">
-							<view class="title">
-								name:
-							</view>
-							<view class="titles">
-								{{item.name}}
-							</view>
-						</view>
-						<view class="scell">
-							<view class="title">
-								type:
-							</view>
-							<view class="titles">
-								{{item.type}}
-							</view>
-						</view>
-						<view class="scell">
-						<view class="title">
-							academy:
-						</view>
-						<view class="titles">
-							{{item.academy}}
-						</view>
-					</view>
-					</view>
-					<view class="btn">
+						<view class="scroll-view-delete">
 						<button type="primary" class="primary" @click="submits(item.id)" >
 							取消
 						</button>
-					</view>
+						</view>
+					</scroll-view>
 				</view>
 
 			</view>
 			<view class="nav_name">未申请招生专业</view>
 			<view class="nav">
 				<view class="nav_items" v-for="(item,index) in list2" :key="index">
-					<view class="left_item">
-						<view class="scell">
+					<scroll-view class="scroll-view-scroller" scroll-x>	
+						<view class="scroll-view-item">
+							<view class="scell">
+								<view class="title">
+									id:
+								</view>
+								<view class="titles">
+									{{item.id}}
+								</view>
+							</view>
+							<view class="scell">
+								<view class="title">
+									code:
+								</view>
+								<view class="titles">
+									{{item.code}}
+								</view>
+							</view>
+							<view class="scell">
+								<view class="title">
+									name:
+								</view>
+								<view class="titles">
+									{{item.name}}
+								</view>
+							</view>
+							<view class="scell">
+								<view class="title">
+									type:
+								</view>
+								<view class="titles">
+									{{item.type}}
+								</view>
+							</view>
+							<view class="scell">
 							<view class="title">
-								id:
+								academy:
 							</view>
 							<view class="titles">
-								{{item.id}}
+								{{item.academy}}
 							</view>
 						</view>
-						<view class="scell">
-							<view class="title">
-								code:
-							</view>
-							<view class="titles">
-								{{item.code}}
-							</view>
 						</view>
-						<view class="scell">
-							<view class="title">
-								name:
-							</view>
-							<view class="titles">
-								{{item.name}}
-							</view>
+						<view class="scroll-view-delete">
+							<button type="primary" class="primary" @click="submit(item.id)" >
+								申请
+							</button>
 						</view>
-						<view class="scell">
-							<view class="title">
-								type:
-							</view>
-							<view class="titles">
-								{{item.type}}
-							</view>
-						</view>
-						<view class="scell">
-						<view class="title">
-							academy:
-						</view>
-						<view class="titles">
-							{{item.academy}}
-						</view>
-					</view>
-					</view>
-					<view class="btn">
-						<button type="primary" class="primary" @click="submit(item.id)" >
-							申请
-						</button>
-					</view>
+					</scroll-view>
 				</view>
 
 			</view>
@@ -216,6 +220,26 @@
 </script>
 
 <style>
+	
+	.scroll-view-scroller {
+		border:1px solid grey;
+		border-radius: 4px;
+		width: 420px; //处于demo考虑 ,scroll-view宽度设为固定值，实际项目中请自行计算
+	}
+	.scroll-view-item {
+	  width: 480px; // 300(scroller的宽度) + 100(delete按钮的宽度)
+	  height: 100px;
+	  position: relative;
+	}
+	.scroll-view-delete {
+	  width: 50px; //按钮的宽度
+	  position: absolute;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	  text-align: center;
+	  line-height: 100px;
+	}
 	.titles{
 		width:400rpx;
 	}
@@ -239,8 +263,6 @@
 	
 	.nav_items{
 		display: flex;
-		border:1px solid grey;
-		border-radius: 4px;
 		height:200rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;
@@ -248,8 +270,7 @@
 	}
 	
 	.nav_item{
-		border:1px solid grey;
-		border-radius: 4px;
+
 		height:200rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;

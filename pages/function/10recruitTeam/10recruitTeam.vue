@@ -40,85 +40,87 @@
 		<view class="nav_name">团队成员</view>
 		<view class="nav">
 			<view class="nav_items" v-for="(item,index) in datalist" :key="index">
-				<view class="left_item">
-					<view class="scells">
-						<view class="title">
-							教师号:
+				<scroll-view class="scroll-view-scroller" scroll-x>
+					<view class="scroll-view-item">
+						<view class="scells">
+							<view class="title">
+								教师号:
+							</view>
+							<view class="titles">
+								{{item.id}}
+							</view>
 						</view>
-						<view class="titles">
-							{{item.id}}
+						<view class="scells">
+							<view class="title">
+								姓名:
+							</view>
+							<view class="titles">
+								{{item.name}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								荣誉:
+							</view>
+							<view class="titles">
+								{{item.award}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								性别:
+							</view>
+							<view class="titles">
+								{{item.gender}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								年龄:
+							</view>
+							<view class="titles">
+								{{item.age}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								职称:
+							</view>
+							<view class="titles">
+								{{item.rank}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								方向:
+							</view>
+							<view class="titles">
+								{{item.dirction}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								教育背景:
+							</view>
+							<view class="titles">
+								{{item.eduback}}
+							</view>
+						</view>
+						<view class="scells">
+							<view class="title">
+								学院:
+							</view>
+							<view class="titles">
+								{{item.unit}}
+							</view>
 						</view>
 					</view>
-					<view class="scells">
-						<view class="title">
-							姓名:
-						</view>
-						<view class="titles">
-							{{item.name}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							荣誉:
-						</view>
-						<view class="titles">
-							{{item.award}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							性别:
-						</view>
-						<view class="titles">
-							{{item.gender}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							年龄:
-						</view>
-						<view class="titles">
-							{{item.age}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							职称:
-						</view>
-						<view class="titles">
-							{{item.rank}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							方向:
-						</view>
-						<view class="titles">
-							{{item.dirction}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							教育背景:
-						</view>
-						<view class="titles">
-							{{item.eduback}}
-						</view>
-					</view>
-					<view class="scells">
-						<view class="title">
-							学院:
-						</view>
-						<view class="titles">
-							{{item.unit}}
-						</view>
-					</view>
-				</view>
-				<view class="btn">
+					<view class="scroll-view-delete">
 					<button type="primary" class="primary" @click="sub(item.id)" >
 						移除
 					</button>
-				</view>
+					</view>
+				</scroll-view>
 			</view>
 		
 		</view>
@@ -147,10 +149,11 @@
 				tn:"",
 				u:"",
 				datalist:[],
+
 			}
 		},
 		computed: mapState(['token']),
-		methods: {
+		methods: {       
 			getData(){
 				uni.request({
 					method:'POST',
@@ -238,6 +241,26 @@
 </script>
 
 <style>
+	.scroll-view-scroller {
+		border:1px solid grey;
+		border-radius: 4px;
+		width: 420px; //处于demo考虑 ,scroll-view宽度设为固定值，实际项目中请自行计算
+	}
+	.scroll-view-item {
+	  width: 480px; // 300(scroller的宽度) + 100(delete按钮的宽度)
+	  height: 100px;
+	  position: relative;
+	}
+	.scroll-view-delete {
+	  width: 50px; //按钮的宽度
+	  position: absolute;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	  text-align: center;
+	  line-height: 100px;
+	}
+	
 	.sub{
 		height: 50rpx;
 		margin-top: 40rpx;
@@ -278,8 +301,7 @@
 	}
 	
 	.nav_item{
-		border:1px solid grey;
-		border-radius: 4px;
+
 		height:300rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;
@@ -302,16 +324,13 @@
 		flex: 1;
 		flex-direction:row;
 		height: 350rpx;
-		margin-left: 100rpx;
 	}
 	.primary{
-		line-height:150rpx;
+		line-height:175rpx;
 
 	}
 	.nav_items{
 		display: flex;
-		border:1px solid grey;
-		border-radius: 4px;
 		height:350rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;
