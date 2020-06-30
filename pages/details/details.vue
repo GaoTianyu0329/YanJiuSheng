@@ -241,7 +241,7 @@
 					
 		},
 		onReady() {
-			switch(this.d){
+			switch(this.t){
 				case '0':
 					this.setTitle('论文详情');
 					break;
@@ -262,7 +262,7 @@
 		},
 		onLoad: function (option) { //option为object类型，会序列化上个页面传递的参数
 		       
-				this.d = option.kind;
+				this.t = option.kind;
 				this.i = option.i;
 				this.n = option.n;
 				this.time = option.time;
