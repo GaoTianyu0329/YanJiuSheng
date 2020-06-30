@@ -157,7 +157,7 @@
 		},
 		computed:mapState(['token']),
 		methods: {
-<<<<<<< HEAD
+
 			getData(){
 				uni.request({
 					method:'POST',
@@ -180,17 +180,11 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
-						uni.showToast({
-							icon: 'none',
-							title: '登录过期请重新登录'
-						});
-						uni.clearStorageSync();
-						uni.navigateTo({
-							url: '../login/login'
-						});
+						
 					}
 				});
-=======
+			},
+
 			change(){
 				uni.redirectTo({
 					url:'/pages/recruitInfo/recruitInfo'
@@ -206,7 +200,7 @@
 				
 				return result;
 				
->>>>>>> 81c0cc1da238b76b98905502210c0928db3c7d5a
+
 			},
 			submits(id) {
 				console.log(id);

@@ -163,45 +163,7 @@
 			}
 		},
 		computed: mapState(['token']),
-<<<<<<< HEAD
-		methods: {       
-			getData(){
-				uni.request({
-					method:'POST',
-					url:'http://112.124.22.241:8080/recuritteam',
-					data:{
-						token:this.token
-					},
-					success: (res) => {
-						const resData = res.data;
-						if(resData.status == 'success'){
-							const re = resData.result.tai;
-							const ree = resData.result.tml;
-							this.datalist = ree;
-							console.log(ree);
-							this.ta = re.ta;
-							this.ti = re.ti;
-							this.tn = re.tn;
-							this.u = re.u;
-							console.log(re);
-							
-						}else{
-							console.log(resData.reason);
-						}
-					},
-					fail: (res) => {
-						console.log(res.errMsg);
-						uni.showToast({
-							icon: 'none',
-							title: '登录过期请重新登录'
-						});
-						uni.clearStorageSync();
-						uni.navigateTo({
-							url: '../login/login'
-						});
-					}
-				});
-=======
+
 		methods: {
 			getStorageData(key){
 				var result = "";
@@ -218,7 +180,7 @@
 				uni.redirectTo({
 					url:'/pages/teamInfo/teamInfo'
 				})
->>>>>>> 81c0cc1da238b76b98905502210c0928db3c7d5a
+
 			},
 			sub(id) {
 				console.log(id);
