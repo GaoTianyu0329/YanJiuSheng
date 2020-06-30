@@ -211,31 +211,40 @@
 			},
 			search(id) {
 				console.log(id);
-				uni.request({
-					method:'POST',
-					url:'http://112.124.22.241:8080/recuritteam',
-					data:{
-						token:this.token,
-						personId:id,
-						type:1,
-					},
-					method:'POST',
-					
-					success:(res)=>{
-						const resData = res.data;
-						if(resData.ststus == 'success'){
-							console.log(resData);
-						}else{
-							console.log(resData);
+				if(id!=1 && id!=2 && id!=3){
+					uni.showToast({
+					    title: '不存在的教师id！',
+					    duration: 2000,
+						icon: 'none'
+					});
+				}
+				else{
+					uni.request({
+						method:'POST',
+						url:'http://112.124.22.241:8080/recuritteam',
+						data:{
+							token:this.token,
+							personId:id,
+							type:1,
+						},
+						method:'POST',
+						
+						success:(res)=>{
+							const resData = res.data;
+							if(resData.ststus == 'success'){
+								console.log(resData);
+							}else{
+								console.log(resData);
+							}
+						},
+						fail: (res) => {
+							console.log(res.errMsg);
 						}
-					},
-					fail: (res) => {
-						console.log(res.errMsg);
-					}
-				});
-				uni.redirectTo({
-					url:'../10recruitTeam/10recruitTeam'
-				})
+					});
+					uni.redirectTo({
+						url:'../10recruitTeam/10recruitTeam'
+					});
+				}
 			},
 			
 		},
