@@ -45,7 +45,7 @@
 			console.log('App Launch');
 			const hasLogin = this.getStorageData("hasLogin") || false;
 			const openId = this.getStorageData("openId") || "";
-			if(1){
+			if(!hasLogin){
 				uni.login({
 					provider:'weixin',
 					success: (res) => {
@@ -66,7 +66,6 @@
 							
 							},
 							fail: (loginRes) => {
-								
 								console.log('2')
 								console.log(loginRes)
 								uni.clearStorageSync()
@@ -75,48 +74,48 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
-						
 					}
 				})
-			}
-			// else{
-			// 	const teacherId = this.getStorageData('teacherId')
-			// 	const password = this.getStorageData('pwd')
-			// 	uni.request({
-			// 		url: 'http://112.124.22.241:8080/login',
-			// 		data: {
-			// 			u:teacherId,
-			// 			p:password
-			// 		},
-			// 		method:'POST',
-			// 		success:(res) => {
+			}else{
+				const teacherId = this.getStorageData('teacherId')
+				const password = this.getStorageData('pwd')
+				uni.request({
+					url: 'http://112.124.22.241:8080/login',
+					data: {
+						u:teacherId,
+						p:password
+					},
+					method:'POST',
+					success:(res) => {
 						
-			// 			const resData = res.data;
-			// 			if(resData.status == 'success'){
+						const resData = res.data;
+						if(resData.status == 'success'){
 							
-			// 				this.storageData("hasLogin",true);
-			// 				this.storageData('token',resData.result.token);
+							this.storageData("hasLogin",true);
+							this.storageData('token',resData.result.token);
 							
-			// 				this.initState()
+							this.initState()
 							
 											
-			// 			}else{
-			// 				uni.showToast({
-			// 					icon: 'none',
-			// 					title: resData.reason,
-			// 				});
-			// 			}
-			// 		},
-			// 		fail:(res) =>{
-			// 			console.log(res);
-			// 			uni.showToast({
-			// 				icon: 'none',
-			// 				title: res.errMsg,
-			// 			});
-			// 		}
-			// 	});
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: resData.reason,
+							});
+						}
+					},
+					fail:(res) =>{
+						console.log(res);
+						uni.showToast({
+							icon: 'none',
+							title: res.errMsg,
+						});
+					}
+				});
 				
-			// }
+			}
+			
+			
 			
 			
 		},

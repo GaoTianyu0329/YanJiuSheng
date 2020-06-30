@@ -100,7 +100,7 @@
 		mapMutations
 	} from 'vuex'
 	export default {
-		computed:mapState(['forcedLogin', 'hasLogin', 'userName','teacherId','openId','token']),
+		computed:mapState(['forcedLogin', 'userName','teacherId','openId','token']),
 		
 		data() {
 			return {
@@ -131,10 +131,11 @@
 						path: '/pages/function/8incentiveMt/8incentiveMt'
 					},
 				],
+				hasLogin:false
 			}
 		},
 		onShow() {
-			
+			this.hasLogin = uni.getStorageSync('token')
 			
 		},
 		methods: {
