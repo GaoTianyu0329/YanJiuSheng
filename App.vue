@@ -74,6 +74,7 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						
 					}
 				})
 			}else{

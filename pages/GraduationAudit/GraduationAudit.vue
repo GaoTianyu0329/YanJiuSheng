@@ -154,10 +154,14 @@
 						}
 					},
 					fail: (res) => {
-						console.log(res.errMsg)
+						console.log(res.errMsg);
 						uni.showToast({
 							icon: 'none',
-							title: res.errMsg,
+							title: '登录过期请重新登录'
+						});
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url: '../login/login'
 						});
 					}
 				})

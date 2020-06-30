@@ -52,7 +52,8 @@
 
 <script>
 	import {
-		mapState
+		mapState,
+		mapMutations
 	} from 'vuex'
 	export default {
 		computed: mapState(['hasLogin', 'teacherId']),
@@ -81,6 +82,16 @@
 						var teacherList=res.data.data;
 						this.teacherList=teacherList;
 					}
+				},
+				fail: (res) => {
+					uni.showToast({
+						icon: 'none',
+						title: '登录过期请重新登录'
+					});
+					uni.clearStorageSync();
+					uni.navigateTo({
+						url: '../../login/login'
+					});
 				}
 			})
 			
