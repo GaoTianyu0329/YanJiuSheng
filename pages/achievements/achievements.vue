@@ -27,6 +27,10 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -38,6 +42,7 @@
 			}
 		},
 		methods: {
+			...mapMutations(['logout']),
 			submit(){
 				uni.request({
 					method:'POST',
@@ -66,6 +71,14 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon: 'none',
+							title: '登录过期请重新登录'
+						});
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url: '../login/login'
+						});
 					}
 				})
 			}

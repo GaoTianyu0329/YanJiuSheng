@@ -121,6 +121,14 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon: 'none',
+							title: '登录过期请重新登录'
+						});
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url: '../login/login'
+						});
 					}
 				});
 				uni.redirectTo({
@@ -150,6 +158,14 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon: 'none',
+							title: '登录过期请重新登录'
+						});
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url: '../login/login'
+						});
 					}
 				});
 				uni.redirectTo({
@@ -179,6 +195,14 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon: 'none',
+							title: '登录过期请重新登录'
+						});
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url: '../login/login'
+						});
 					}
 				});
 				uni.redirectTo({
@@ -209,6 +233,14 @@
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
+						uni.showToast({
+							icon: 'none',
+							title: '登录过期请重新登录'
+						});
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url: '../login/login'
+						});
 					}
 				});
 			},

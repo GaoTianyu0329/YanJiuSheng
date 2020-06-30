@@ -157,6 +157,34 @@
 		},
 		computed:mapState(['token']),
 		methods: {
+
+			getData(){
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/recurit',
+					data:{
+						token:this.token
+					},
+					success: (res) => {
+						const resData = res.data;
+						if(resData.status == 'success'){
+							const result1 = resData.result;
+							console.log(result1);
+							this.list1 = result1.loma;
+							const result2 = resData.result;
+							this.list2 = result2.nloma;
+							
+						}else{
+							console.log(resData.reason);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+						
+					}
+				});
+			},
+
 			change(){
 				uni.redirectTo({
 					url:'/pages/recruitInfo/recruitInfo'
@@ -172,6 +200,7 @@
 				
 				return result;
 				
+
 			},
 			submits(id) {
 				console.log(id);

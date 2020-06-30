@@ -163,6 +163,7 @@
 			}
 		},
 		computed: mapState(['token']),
+
 		methods: {
 			getStorageData(key){
 				var result = "";
@@ -179,6 +180,7 @@
 				uni.redirectTo({
 					url:'/pages/teamInfo/teamInfo'
 				})
+
 			},
 			sub(id) {
 				console.log(id);
