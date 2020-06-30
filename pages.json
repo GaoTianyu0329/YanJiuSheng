@@ -191,6 +191,10 @@
 				"navigationBarTitleText": "论文审核"
 			}
         }
+        ,{
+            "path" : "pages/achievements/achievements",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 			"color":"#8a8a8a",

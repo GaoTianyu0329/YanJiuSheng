@@ -265,7 +265,7 @@
 					
 					success:(res)=>{
 						const resData = res.data;
-						if(resData.ststus == 'success'){
+						if(resData.status == 'success'){
 							console.log(resData);
 							uni.showToast({
 								icon:'none',

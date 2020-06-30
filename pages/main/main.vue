@@ -167,13 +167,23 @@
 			}
 		},
 		onReady() {
+	// 		this.hasLogin = uni.getStorageSync('hasLogin')
+	// 		if (!this.hasLogin) {
+	// 			console.log(this.hasLogin)
+	// 			uni.navigateTo({
+	// 				url: '../login/login'
+	// 			});
+	
+	// 		}
+		},
+		onShow() {
 			this.hasLogin = uni.getStorageSync('hasLogin')
 			if (!this.hasLogin) {
 				console.log(this.hasLogin)
 				uni.navigateTo({
 					url: '../login/login'
 				});
-	
+				
 			}
 		},
 		methods: {

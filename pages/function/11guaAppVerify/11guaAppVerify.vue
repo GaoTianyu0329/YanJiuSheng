@@ -16,7 +16,7 @@
 				<view :id="'top'+listIndex" style="width: 100%;height: 110upx;"></view>
 				
 					<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index" @tap=navigateTo(item)>
-					<view class="content">
+						<view class="content">
 						<text class="title"> 姓名：{{item.n}}</text>
 						<text class="title"> 班级：{{item.a}}</text>
 						<text class="title"> 年龄：{{item.l}}</text>
@@ -24,9 +24,10 @@
 						<text class="title" v-if="item.status == '1'">已申请未处理</text>
 						<text class="title" v-if="item.status == '2'">未通过审核</text>
 						<text class="title" v-if="item.status == '3'">已通过审核 </text>
-					</view>
+						</view>
 						<view style="color: #000000;margin-top: auto;margin-bottom: auto;margin-right: 12px;font-size: 14px;">详情></view>
 					</view>
+					
 				
 				<view class='noCard' v-if="listItem.length===0">
 					暂无信息
@@ -53,8 +54,8 @@
 				toView:'',//回到顶部id
 				tabTitle:['未审核列表','已审核列表'], //导航栏格式 --导航栏组件
 				currentTab: 0, //sweiper所在页
-				pages:[1,1,1,1], //第几个swiper的第几页
-				list: [[1, 2, 3, 4, 5, 6],['a', 'b', 'c', 'd', 'e', 'f'],[],['2233','4234','13144','324244']] //数据格式
+				pages:[1,1], //第几个swiper的第几页
+				list: [[],[]] //数据格式
 			}
 		
 		},

@@ -16,6 +16,9 @@
 				<button type="default" class="primary" @tap='change()'>
 					修改数据
 				</button>
+				<button type="default" class="primary" @tap='del()'>
+					删除
+				</button>
 				
 			</view>
 		</view>
@@ -89,6 +92,37 @@
 				
 				console.log(this.toChangeInfo);
 			},
+			del(){
+				uni.request({
+					method:'POST',
+					url:'http://112.124.22.241:8080/addOrdeleteachi',
+					data:{
+						token:this.token,
+						i:this.i,
+						
+						type:1
+					},
+					success: (res) => {
+						const resData = res.data;
+						if(resData.status == 'success'){
+							const result = resData.result;
+							uni.showToast({
+								icon:'none',
+								title:'删除成功'
+							})
+							uni.navigateBack();
+							
+						}else{
+							console.log(resData.reason);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				})
+			},
+			
+			
 			cancel(){
 				this.isChange = false;
 				this.n = this.temp_data.name;
@@ -227,24 +261,7 @@
 			};
 		},
 		onLoad: function (option) { //option为object类型，会序列化上个页面传递的参数
-		        // switch(option.kind){
-		        // 	case '0':
-		        // 		this.setTitle('论文详情');
-		        // 		break;
-		        // 	case '1':
-		        // 		this.setTitle('专著详情');
-		        // 		break;
-		        // 	case '2':
-		        // 		this.setTitle('项目详情');
-		        // 		break;
-		        // 	case '3':
-		        // 		this.setTitle('专利详情');
-		        // 		break;
-		        // 	case '4':
-		        // 		this.setTitle('奖励详情');
-		        // 		break;
-		        	
-		        // };
+		       
 				this.d = option.kind;
 				this.i = option.i;
 				this.n = option.n;

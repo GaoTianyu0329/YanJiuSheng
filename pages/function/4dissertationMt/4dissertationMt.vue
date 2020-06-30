@@ -16,8 +16,14 @@
 					<image class="image-arrow" mode="widthFix" src="../../../static/img/arrow.png"></image>
 				</view>
 				<view  class="view-line"></view>
+				
 			</view>
-			
+			<view class="btn-row">
+					
+					<button type="primary" class="primary"@tap='toAdd()' >
+						添加
+					</button>
+				</view>
 		</scroll-view>
 	</view>
 </template>
@@ -41,6 +47,12 @@
 			navigateTo(item){
 				var url = '../../details/details?';
 				url = url + "kind=0&i="+item.i+'&n='+item.n+'&time='+item.time+'&d='+item.d,+'&personId='+item.personId;
+				uni.navigateTo({
+					url: url
+				});
+			},
+			toAdd(){
+				var url = '../../achievements/achievements?type=1';
 				uni.navigateTo({
 					url: url
 				});
