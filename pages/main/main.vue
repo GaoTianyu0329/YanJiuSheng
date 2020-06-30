@@ -52,7 +52,7 @@
 				您好 游客。
 			</view>
 			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
+				<!-- <view>这是 uni-app 带登录模板的示例App首页。</view> -->
 				<view>在 “我的” 中点击 “登录” 可以 “登录您的账户”</view>
 			</view>
 		</view>
@@ -163,7 +163,7 @@
 						path: '/pages/function/17returnChaVerify/17returnChaVerify'
 					},
 				],
-				hasLogin:false
+				hasLogin:true
 			}
 		},
 		onReady() {
@@ -177,21 +177,131 @@
 	// 		}
 		},
 		onShow() {
-			this.hasLogin = uni.getStorageSync('hasLogin')
-			if (!this.hasLogin) {
-				console.log(this.hasLogin)
-				uni.navigateTo({
-					url: '../login/login'
+			
+			// this.hasLogin = uni.getStorageSync('hasLogin')
+			// if (!this.hasLogin) {
+			// 	console.log(this.hasLogin)
+			// 	uni.navigateTo({
+			// 		url: '../login/login'
+			// 	});
+				
+			// }
+		},
+		onLoad() {
+			// this.hasLogin = this.getStorageData("hasLogin") || false;
+			const openId = this.getStorageData("openId") || "";
+			if(1){
+				uni.login({
+					provider:'weixin',
+					success: (res) => {
+						// console.log(res.code)
+						const code = res.code;
+						uni.request({
+							url: 'http://112.124.22.241:8080/login',
+							data: {
+								code:code,
+							},
+							method:'POST',
+							success: (loginRes) => {
+								const resData = loginRes.data;
+								
+								this.storageData("hasLogin",true);
+								this.hasLogin = true
+								this.storageData('token',resData.result.token);
+								
+							
+							},
+							fail: (loginRes) => {
+								this.hasLogin = false
+								console.log('2')
+								console.log(loginRes)
+								uni.clearStorageSync()
+								console.log(this.hasLogin)
+								uni.navigateTo({
+									url: '../login/login'
+								});
+							}
+						})
+					},
+					fail: (res) => {
+						this.hasLogin = false
+						console.log(res.errMsg);
+						console.log(this.hasLogin)
+						uni.navigateTo({
+							url: '../login/login'
+						});
+						
+					}
+				})
+			}else{
+				const teacherId = this.getStorageData('teacherId')
+				const password = this.getStorageData('pwd')
+				uni.request({
+					url: 'http://112.124.22.241:8080/login',
+					data: {
+						u:teacherId,
+						p:password
+					},
+					method:'POST',
+					success:(res) => {
+						
+						const resData = res.data;
+						if(resData.status == 'success'){
+							
+							this.storageData("hasLogin",true);
+							this.storageData('token',resData.result.token);
+							
+							
+							
+											
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: resData.reason,
+							});
+						}
+					},
+					fail:(res) =>{
+						console.log(res);
+						uni.showToast({
+							icon: 'none',
+							title: res.errMsg,
+						});
+					}
 				});
 				
 			}
+			// this.hasLogin = uni.getStorageSync('hasLogin')
+			// if (!this.hasLogin) {
+			// 	console.log(this.hasLogin)
+			// 	uni.navigateTo({
+			// 		url: '../login/login'
+			// 	});
+				
+			// }
 		},
+		
 		methods: {
 			navItemClick(url) {
 				uni.navigateTo({
 					url
 				});
 			},
+			getStorageData(key){
+				var result = "";
+				try{
+					result = uni.getStorageSync(key);
+				}catch(e){
+					console.log(e);
+				};
+				
+				return result;
+				
+			},
+			storageData(key,data){
+				uni.setStorageSync(key,data)
+				
+			}
 		}
 	}
 </script>
