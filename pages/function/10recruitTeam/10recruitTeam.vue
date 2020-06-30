@@ -1,135 +1,145 @@
 <template>
 	<view class="content">
-		<view class="nav_name">招生团队信息</view>
-		<view class="nav_item">
-			<view class="scell">
-					<view class="title">
-						团队名称:
-					</view>
-					<view class="titles">
-						{{tn}}
-					</view>
+		<view v-if="ta!=null">
+			<view class="nav_name">招生团队信息</view>
+			<view class="nav_item">
+				<view class="scell">
+						<view class="title">
+							团队名称:
+						</view>
+						<view class="titles">
+							{{tn}}
+						</view>
 
-			</view>
-			<view class="scell">
-					<view class="title">
-						责任导师:
-					</view>
-					<view class="titles">
-						{{ta}}
-					</view>
-			</view>
-			<view class="scell">
-					<view class="title">
-						培养单位:
-					</view>
-					<view class="titles">
-						{{u}}
-					</view>
-			</view>
-			<view class="scell">
-					<view class="title">
-						团队介绍:
-					</view>
-					<view class="titles">
-						{{ti}}
-					</view>
+				</view>
+				<view class="scell">
+						<view class="title">
+							责任导师:
+						</view>
+						<view class="titles">
+							{{ta}}
+						</view>
+				</view>
+				<view class="scell">
+						<view class="title">
+							培养单位:
+						</view>
+						<view class="titles">
+							{{u}}
+						</view>
+				</view>
+				<view class="scell">
+						<view class="title">
+							团队介绍:
+						</view>
+						<view class="titles">
+							{{ti}}
+						</view>
 
+				</view>
 			</view>
-		</view>
-		<view class="nav_name">团队成员</view>
-		<view class="nav">
-			<view class="nav_items" v-for="(item,index) in datalist" :key="index">
-				<scroll-view class="scroll-view-scroller" scroll-x>
-					<view class="scroll-view-item">
-						<view class="scells">
-							<view class="title">
-								教师号:
+			<view class="nav_name">团队成员</view>
+			<view class="nav">
+				<view class="nav_items" v-for="(item,index) in datalist" :key="index">
+					<scroll-view class="scroll-view-scroller" scroll-x>
+						<view class="scroll-view-item">
+							<view class="scells">
+								<view class="title">
+									教师号:
+								</view>
+								<view class="titles">
+									{{item.id}}
+								</view>
 							</view>
-							<view class="titles">
-								{{item.id}}
+							<view class="scells">
+								<view class="title">
+									姓名:
+								</view>
+								<view class="titles">
+									{{item.name}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									荣誉:
+								</view>
+								<view class="titles">
+									{{item.award}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									性别:
+								</view>
+								<view class="titles">
+									{{item.gender}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									年龄:
+								</view>
+								<view class="titles">
+									{{item.age}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									职称:
+								</view>
+								<view class="titles">
+									{{item.rank}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									方向:
+								</view>
+								<view class="titles">
+									{{item.dirction}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									教育背景:
+								</view>
+								<view class="titles">
+									{{item.eduback}}
+								</view>
+							</view>
+							<view class="scells">
+								<view class="title">
+									学院:
+								</view>
+								<view class="titles">
+									{{item.unit}}
+								</view>
 							</view>
 						</view>
-						<view class="scells">
-							<view class="title">
-								姓名:
-							</view>
-							<view class="titles">
-								{{item.name}}
-							</view>
+						<view class="scroll-view-delete">
+						<button type="primary" class="primary" @click="sub(item.id)" >
+							移除
+						</button>
 						</view>
-						<view class="scells">
-							<view class="title">
-								荣誉:
-							</view>
-							<view class="titles">
-								{{item.award}}
-							</view>
-						</view>
-						<view class="scells">
-							<view class="title">
-								性别:
-							</view>
-							<view class="titles">
-								{{item.gender}}
-							</view>
-						</view>
-						<view class="scells">
-							<view class="title">
-								年龄:
-							</view>
-							<view class="titles">
-								{{item.age}}
-							</view>
-						</view>
-						<view class="scells">
-							<view class="title">
-								职称:
-							</view>
-							<view class="titles">
-								{{item.rank}}
-							</view>
-						</view>
-						<view class="scells">
-							<view class="title">
-								方向:
-							</view>
-							<view class="titles">
-								{{item.dirction}}
-							</view>
-						</view>
-						<view class="scells">
-							<view class="title">
-								教育背景:
-							</view>
-							<view class="titles">
-								{{item.eduback}}
-							</view>
-						</view>
-						<view class="scells">
-							<view class="title">
-								学院:
-							</view>
-							<view class="titles">
-								{{item.unit}}
-							</view>
-						</view>
-					</view>
-					<view class="scroll-view-delete">
-					<button type="primary" class="primary" @click="sub(item.id)" >
-						移除
-					</button>
-					</view>
-				</scroll-view>
+					</scroll-view>
+				</view>
+			
 			</view>
-		
-		</view>
-		<view class="nav_name">添加成员</view>
-		<view class="search">
+			<view class="nav_name">添加成员</view>
 			<view class="search">
 				<view class="word">请输入教师号：</view>
 				<input class="tid" type="text" v-model="id">
 				<button class="sub" @click="search(id)">提交</button> 
+			</view>
+		</view>
+		<view v-if="ta==null">
+			请点击按钮，完善团队信息
+			<view class="btn-row">
+			
+				<button type="default" class="primary" @tap='change()'>
+					完善信息
+				</button>
+			
 			</view>
 		</view>
 	</view>
@@ -153,6 +163,7 @@
 			}
 		},
 		computed: mapState(['token']),
+<<<<<<< HEAD
 		methods: {       
 			getData(){
 				uni.request({
@@ -190,6 +201,24 @@
 						});
 					}
 				});
+=======
+		methods: {
+			getStorageData(key){
+				var result = "";
+				try{
+					result = uni.getStorageSync(key);
+				}catch(e){
+					console.log(e);
+				};
+				
+				return result;
+				
+			},
+			change(){
+				uni.redirectTo({
+					url:'/pages/teamInfo/teamInfo'
+				})
+>>>>>>> 81c0cc1da238b76b98905502210c0928db3c7d5a
 			},
 			sub(id) {
 				console.log(id);
@@ -246,10 +275,43 @@
 					url:'../10recruitTeam/10recruitTeam'
 				})
 			},
-			onShow() {
-				this.getData();
-		    
-			},
+			
+		},
+		onLoad() {
+			var that = this;
+			this.token = this.getStorageData('token');
+			
+			
+			uni.request({
+				method:'POST',
+				url:'http://112.124.22.241:8080/recuritteam',
+				data:{
+					token:this.token
+				},
+				success: (res) => {
+					console.log(res)
+					const resData = res.data;
+					if(resData.status == 'success'){
+						const re = resData.result.tai;
+						this.ta = re.ta;
+						this.ti = re.ti;
+						this.tn = re.tn;
+						this.u = re.u;
+						const ree = resData.result.tml;
+						this.datalist = ree;
+						console.log(ree);
+						if(this.ta!=null){
+							console.log(this.ta);
+						};
+					}
+					else{
+						console.log(resData.reason);
+					}
+				},
+				fail: (res) => {
+					console.log(res.errMsg);
+				}
+			});
 		},
 	}
 </script>

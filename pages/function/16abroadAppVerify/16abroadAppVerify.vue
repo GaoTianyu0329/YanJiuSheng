@@ -70,10 +70,10 @@
 						</view>
 					</view>
 					<view class="scroll-view-delete">
-						<button type="primary" class="primary" @click="submits(item.id)" >
+						<button type="primary" class="primarys" @click="submits(item.id)" >
 							通过
 						</button>
-						<button type="primary" class="primary" @click="submit(item.id)" >
+						<button type="primary" class="primarys" @click="submit(item.id)" >
 							不通过				
 						</button>
 					</view>
@@ -253,7 +253,16 @@
 </script>
 
 <style>
-	
+	.primarys{
+		font-size: 20rpx;
+		margin-right: 20rpx;
+		background-color: #FFFFFF;
+		outline-style: none ;
+		border: 1px solid #d60016; 
+		border-radius: 8px;
+		text-decoration-color: #000;
+		color: #d60016;
+	}
 	.scroll-view-scroller {
 		border:1px solid grey;
 		border-radius: 4px;

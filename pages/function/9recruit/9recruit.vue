@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-<!-- 		<view v-if="completeInfo == true"> -->
+		<view v-if="pc!=null">
 			<view class="nav_name">已申请招生专业</view>
 			<view class="nav">
 				<view class="nav_items" v-for="(item,index) in list1" :key="index">
@@ -111,7 +111,17 @@
 				</view>
 
 			</view>
-<!-- 		</view> -->
+		</view>
+		<view v-else-if="pc==null">
+			请点击按钮，完善个人信息
+			<view class="btn-row">
+			
+				<button type="default" class="primary" @tap='change()'>
+					完善信息
+				</button>
+			
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -126,10 +136,28 @@
 			return {
 				list1: [],
 				list2: [],
+				id: "",
+				pc:'',
+				bc:'',
+				ac:"",
+				ic:"",
+				tc:"",
+				dc:"",
+				nc:"",
+				npc:"",
+				ppc:"",
+				nppc:"",
+				cpc:"",
+				dsc:"",
+				msc:"",
+				hgdsc:"",
+				token:"",
+				
 			}
 		},
-		computed: mapState(['token']),
+		computed:mapState(['token']),
 		methods: {
+<<<<<<< HEAD
 			getData(){
 				uni.request({
 					method:'POST',
@@ -162,8 +190,24 @@
 						});
 					}
 				});
+=======
+			change(){
+				uni.redirectTo({
+					url:'/pages/recruitInfo/recruitInfo'
+				})
 			},
-			
+			getStorageData(key){
+				var result = "";
+				try{
+					result = uni.getStorageSync(key);
+				}catch(e){
+					console.log(e);
+				};
+				
+				return result;
+				
+>>>>>>> 81c0cc1da238b76b98905502210c0928db3c7d5a
+			},
 			submits(id) {
 				console.log(id);
 				uni.request({
@@ -192,7 +236,6 @@
 					url:'../9recruit/9recruit'
 				})
 			},
-			
 			submit(id) {
 				console.log(id);
 				uni.request({
@@ -222,19 +265,70 @@
 				})
 			},
 		},
-		
 
-		
-		 onShow() {
-			this.getData();
+		onLoad() {
+			var that = this;
+			this.token = this.getStorageData('token');
 		    
+			uni.request({
+		    	method:'POST',
+		    	url:'http://112.124.22.241:8080/recurit',
+		    	data:{
+		    		token:this.token
+		    	},
+		    	success: (res) => {
+		    		const resData = res.data;
+		    		if(resData.status == 'success'){
+		    			const result1 = resData.result;
+		    			console.log(result1);
+		    			this.list1 = result1.loma;
+		    			const result2 = resData.result;
+		    			this.list2 = result2.nloma;
+		    			const result = resData.result.aaai;
+		    			this.id = result.id;
+		    			this.pc = result.pc;
+		    			this.bc = result.bc;
+		    			this.ac = result.ac;
+		    			this.ic = result.ic;
+		    			this.tc = result.tc;
+		    			this.dc = result.dc;
+		    			this.npc = result.npc;
+		    			this.nc = result.nc;
+		    			this.ppc = result.ppc;
+		    			this.nppc = result.nppc;
+		    			this.cpc = result.cpc;
+		    			this.dsc = result.dsc;
+		    			this.msc = result.msc;
+		    			this.hgdsc = result.hgdsc;
+						if(this.pc != null){
+							console.log(this.pc);
+						};
+		    			
+		    		}else{
+		    			console.log(resData.reason);
+		    		}
+		    	},
+		    	fail: (res) => {
+		    		console.log(res.errMsg);
+		    	}
+		    });
+			
 		},
 		
 	}
 </script>
 
 <style>
-	
+	.button.primary {
+		width: 280rpx;
+		margin: auto;
+		background-color: #FFFFFF;
+		outline-style: none ;
+		border: 1px solid #d60016; 
+		border-radius: 8px;
+		text-decoration-color: #000;
+		color: #d60016;
+	}
 	.scroll-view-scroller {
 		border:1px solid grey;
 		border-radius: 4px;

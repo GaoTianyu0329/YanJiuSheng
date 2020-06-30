@@ -183,6 +183,7 @@
 					},
 					success: (res) => {
 						const resData = res.data;
+						console.log(this.token)
 						if(resData.status == 'success'){
 							const result1 = resData.result;
 							console.log(result1);
@@ -256,8 +257,7 @@
 	
 	.nav_items{
 		display: flex;
-		border:1px solid grey;
-		border-radius: 4px;
+
 		height:100rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;
@@ -265,8 +265,6 @@
 	}
 	
 	.nav_item{
-		border:1px solid grey;
-		border-radius: 4px;
 		height:200rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;
