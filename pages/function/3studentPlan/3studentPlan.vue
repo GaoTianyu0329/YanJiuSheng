@@ -54,10 +54,10 @@
 						</view>
 					</view>
 					<view class="scroll-view-delete">
-						<button type="primary" class="primary" @click="submits(item.i)" >
+						<button type="primary" class="primarys" @click="submits(item.i)" >
 							通过
 						</button>
-						<button type="primary" class="primary" @click="submit(item.i)" >
+						<button type="primary" class="primarys" @click="submit(item.i)" >
 							不通过				
 						</button>
 					</view>
@@ -223,8 +223,18 @@
 	  line-height: 100px;
 	}
 	.primary{
-		font-size: 40rpx;
+		font-size: 30rpx;
 		margin-right: 20rpx;
+	}
+	.primarys{
+		font-size: 15rpx;
+		margin-right: 20rpx;
+		background-color: #FFFFFF;
+		outline-style: none ;
+		border: 1px solid #d60016; 
+		border-radius: 8px;
+		text-decoration-color: #000;
+		color: #d60016;
 	}
 	
 	.titles{
