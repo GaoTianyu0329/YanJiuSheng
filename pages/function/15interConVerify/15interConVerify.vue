@@ -21,6 +21,14 @@
 								{{item.time}}
 							</view>
 						</view>
+						<view class="scell">
+							<view class="title">
+								主题:
+							</view>
+							<view class="titles">
+								{{item.title}}
+							</view>
+						</view>
 					</view>
 					<view class="scroll-view-delete">
 						<button type="primary" class="primary" @click="sub(item.id)" >
@@ -50,6 +58,14 @@
 							</view>
 							<view class="titles">
 								{{item.time}}
+							</view>
+						</view>
+						<view class="scell">
+							<view class="title">
+								主题:
+							</view>
+							<view class="titles">
+								{{item.title}}
 							</view>
 						</view>
 					</view>

@@ -21,6 +21,14 @@
 								{{item.name}}
 							</view>
 						</view>
+						<view class="scell">
+							<view class="title">
+								计划:
+							</view>
+							<view class="titles">
+								{{item.plan}}
+							</view>
+						</view>
 					</view>
 					<view class="scroll-view-delete">
 						<button type="primary" class="primary" @click="sub(item.i)" >
@@ -50,6 +58,14 @@
 							</view>
 							<view class="titles">
 								{{item.name}}
+							</view>
+						</view>
+						<view class="scell">
+							<view class="title">
+								计划:
+							</view>
+							<view class="titles">
+								{{item.plan}}
 							</view>
 						</view>
 					</view>
@@ -183,17 +199,17 @@
 					},
 					success: (res) => {
 						const resData = res.data;
-						console.log(this.token)
 						if(resData.status == 'success'){
 							const result1 = resData.result;
-							console.log(result1);
 							this.list1 = result1.cl;
 							const result2 = resData.result;
 							this.list2 = result2.ucl;
 							
+							
 						}else{
 							console.log(resData.reason);
 						}
+						console.log(this.list2);
 					},
 					fail: (res) => {
 						console.log(res.errMsg);
@@ -209,6 +225,16 @@
 </script>
 
 <style>
+	.primarys{
+		font-size: 20rpx;
+		margin-right: 20rpx;
+		background-color: #FFFFFF;
+		outline-style: none ;
+		border: 1px solid #d60016; 
+		border-radius: 8px;
+		text-decoration-color: #000;
+		color: #d60016;
+	}
 	.scroll-view-scroller {
 		border:1px solid grey;
 		border-radius: 4px;
@@ -216,7 +242,7 @@
 	}
 	.scroll-view-item {
 	  width: 640px; // 300(scroller的宽度) + 100(delete按钮的宽度)
-	  height: 100px;
+	  height: 150px;
 	  position: relative;
 	}
 	.scroll-view-delete {
@@ -230,18 +256,8 @@
 	  line-height: 100px;
 	}
 	.primary{
-		font-size: 30rpx;
+		font-size: 40rpx;
 		margin-right: 20rpx;
-	}
-	.primarys{
-		font-size: 15rpx;
-		margin-right: 20rpx;
-		background-color: #FFFFFF;
-		outline-style: none ;
-		border: 1px solid #d60016; 
-		border-radius: 8px;
-		text-decoration-color: #000;
-		color: #d60016;
 	}
 	
 	.titles{
@@ -268,7 +284,7 @@
 	.nav_items{
 		display: flex;
 
-		height:100rpx;
+		height:150rpx;
 		font-size: 25rpx;
 		margin-top: 20rpx;
 		width: 500rpx;
