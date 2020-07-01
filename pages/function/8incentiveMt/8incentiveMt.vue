@@ -64,7 +64,7 @@
 					url:'http://112.124.22.241:8080/achi',
 					data:{
 						token:this.token,
-						t:5,
+						t:0,
 					},
 					success: (res) => {
 						const resData = res.data;

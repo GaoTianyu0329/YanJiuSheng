@@ -98,18 +98,18 @@
 							
 											
 						}else{
-							uni.showToast({
-								icon: 'none',
-								title: resData.reason,
-							});
+							// uni.showToast({
+							// 	icon: 'none',
+							// 	title: resData.reason,
+							// });
 						}
 					},
 					fail:(res) =>{
 						console.log(res);
-						uni.showToast({
-							icon: 'none',
-							title: res.errMsg,
-						});
+						// uni.showToast({
+						// 	icon: 'none',
+						// 	title: res.errMsg,
+						// });
 					}
 				});
 				

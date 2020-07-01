@@ -60,15 +60,15 @@
 			</view>
 			<view v-if="status == '2'">
 				<view class="btn-row">
-				<button type="default" class="primary" @tap='submit("1")'>
-					未通过
+				<button type="default" class="primary" @tap='submit("0")'>
+					通过
 				</button>
 				</view>
 			</view>
 			<view v-if="status == '3'">
 				<view class="btn-row">
-				<button type="default" class="primary"  @tap='submit("0")'>
-					已通过
+				<button type="default" class="primary"  @tap='submit("1")'>
+					不通过
 				</button>
 				</view>
 			</view>

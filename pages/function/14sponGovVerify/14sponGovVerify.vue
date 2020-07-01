@@ -203,7 +203,7 @@
 							this.list1 = result1.cl;
 							const result2 = resData.result;
 							this.list2 = result2.ucl;
-							
+							this.$forceUpdate() 
 						}else{
 							console.log(resData.reason);
 						}
